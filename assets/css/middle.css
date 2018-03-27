@@ -1,0 +1,5 @@
+#middle {
+  grid-area: middle;
+  position: relative;
+  background-color: lightgray;
+}

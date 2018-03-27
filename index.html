@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>How to order at Subway</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/upper.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/middle.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/lower.css">
+</head>
+<body>
+  <article id="main">
+    <div id="upper">
+      <div class="question_container" id="bread_question_container">
+        <div class="question">What kind of bread?</div>
+      </div>
+      <div class="question_container" id="meat_question_container">
+        <div class="question">What kind of meat?</div>
+      </div>
+      <div class="question_container" id="cheese_question_container">
+        <div class="question">Cheese?</div>
+      </div>
+      <div class="question_container" id="toast_question_container">
+        <div class="question">Toast it?</div>
+      </div>
+      <div class="question_container" id="sauce_question_container">
+        <div class="question">Sauce?</div>
+      </div>
+      <div class="question_container" id="veggie_question_container">
+        <div class="question">Vegetables?</div>
+      </div>
+    </div>
+    
+    <div id="middle">
+      <canvas id="preview"></canvas>
+      <table id="total_nutrition">
+        <tr><td>Calories</td><td align="right">0</td><td>Cal</td></tr>
+        <tr><td>Fat</td><td align="right">0</td><td>g</td></tr>
+        <tr><td>Sugars</td><td align="right">0</td><td>g</td></tr>
+        <tr><td>Protein</td><td align="right">0</td><td>g</td></tr>
+        <tr><td>Vitamin C</td><td align="right">0</td><td>% DV</td></tr>
+      </table>
+    </div>
+    
+    <div id="lower">
+      <div class="selection_container" id="bread_selection_container">
+        <div class="selection_grid_container" id="bread_size_grid_container">
+          <div class="selection_item" id="six_inch"><img src="./assets/img/six_inch.png" /><p>6 inch</p></div>
+          <div class="selection_item" id="footlong"><img src="./assets/img/footlong.png" /><p>Footlong</p></div>
+        </div>
+        <div class="selection_grid_container" id="bread_grid_container">
+          <div class="selection_item" id="nine_grain_wheat"><img src="./assets/img/nine_grain_wheat.png" /><p>9-Grain Wheat</p></div>
+          <div class="selection_item" id="multi_grain_flatbread"><img src="./assets/img/multi_grain_flatbread.png" /><p>Multi-grain Flatbread</p></div>
+          <div class="selection_item" id="italian"><img src="./assets/img/italian.png" /><p>Italian</p></div>
+          <div class="selection_item" id="italian_herbs_and_cheese"><img src="./assets/img/italian_herbs_and_cheese.png" /><p>Italian Herbs & Cheese</p></div>
+          <div class="selection_item" id="flatbread"><img src="./assets/img/flatbread.png" /><p>Flatbread</p></div>
+        </div>
+      </div>
+      <div class="selection_container" id="meat_selection_container">
+        <div class="selection_grid_container" id="meat_grid_container">
+          <div class="selection_item" id="sweet_onion_chicken_teriyaki"><img src="./assets/img/sweet_onion_chicken_teriyaki.png" /><p>Sweet Onion Chicken Teriyaki</p></div>
+          <div class="selection_item" id="oven_roasted_chicken"><img src="./assets/img/oven_roasted_chicken.png" /><p>Oven Roasted Chicken</p></div>
+          <div class="selection_item" id="turkey_breast"><img src="./assets/img/turkey_breast.png" /><p>Turkey Breast</p></div>
+          <div class="selection_item" id="italian_bmt"><img src="./assets/img/italian_bmt.png" /><p>Italian BMT</p></div>
+          <div class="selection_item" id="tuna"><img src="./assets/img/tuna.png" /><p>Tuna</p></div>
+          <div class="selection_item" id="black_forest_ham"><img src="./assets/img/black_forest_ham.png" /><p>Black Forest Ham</p></div>
+          <div class="selection_item" id="meatball_marinara"><img src="./assets/img/meatball_marinara.png" /><p>Meatball Marinara</p></div>
+        </div>
+      </div>
+      <div class="selection_container" id="cheese_selection_container">
+        <div class="selection_grid_container" id="cheese_grid_container">
+          <div class="selection_item" id="american"><img src="./assets/img/american.png" /><p>American</p></div>
+          <div class="selection_item" id="monterey_cheddar"><img src="./assets/img/monterey_cheddar.png" /><p>Monterey Cheddar</p></div>
+        </div>
+      </div>
+      <div class="selection_container" id="toast_selection_container">
+        <div class="selection_grid_container" id="toast_grid_container">
+          <div class="selection_item" id="toast">Yes please!</div>
+          <div class="selection_item" id="no_toast">No thank you</div>
+        </div>
+      </div>
+      <div class="selection_container" id="sauce_selection_container">
+        <div class="selection_grid_container" id="sauce_grid_container">
+          <div class="selection_item" id="chipotle_southwest"><img src="./assets/img/chipotle_southwest.png" /><p>Chipotle Southwest</p></div>
+          <div class="selection_item" id="mayonnaise"><img src="./assets/img/mayonnaise.png" /><p>Mayonnaise</p></div>
+          <div class="selection_item" id="ranch"><img src="./assets/img/ranch.png" /><p>Ranch</p></div>
+          <div class="selection_item" id="oil"><img src="./assets/img/oil.png" /><p>Oil</p></div>
+          <div class="selection_item" id="vinaigrette"><img src="./assets/img/vinaigrette.png" /><p>Vinaigrette</p></div>
+          <div class="selection_item" id="mustard"><img src="./assets/img/mustard.png" /><p>Mustard</p></div>
+          <div class="selection_item" id="vinegar"><img src="./assets/img/vinegar.png" /><p>Vinegar</p></div>
+          <div class="selection_item" id="sweet_onion"><img src="./assets/img/sweet_onion.png" /><p>Sweet Onion</p></div>
+        </div>
+      </div>
+      <div class="selection_container" id="veggie_selection_container">
+        <div class="selection_grid_container" id="veggie_grid_container">
+          <div class="selection_item" id="cucumbers"><img src="./assets/img/cucumbers.png" /><p>Cucumbers</p></div>
+          <div class="selection_item" id="green_peppers"><img src="./assets/img/green_peppers.png" /><p>Green Peppers</p></div>
+          <div class="selection_item" id="lettuce"><img src="./assets/img/lettuce.png" /><p>Lettuce</p></div>
+          <div class="selection_item" id="red_onions"><img src="./assets/img/red_onions.png" /><p>Red Onions</p></div>
+          <div class="selection_item" id="spinach"><img src="./assets/img/spinach.png" /><p>Spinach</p></div>
+          <div class="selection_item" id="tomatoes"><img src="./assets/img/tomatoes.png" /><p>Tomatoes</p></div>
+          <div class="selection_item" id="banana_peppers"><img src="./assets/img/banana_peppers.png" /><p>Banana Peppers</p></div>
+          <div class="selection_item" id="jalapenos"><img src="./assets/img/jalapenos.png" /><p>Jalapeños</p></div>
+          <div class="selection_item" id="black_olives"><img src="./assets/img/black_olives.png" /><p>Black Olives</p></div>
+          <div class="selection_item" id="pickles"><img src="./assets/img/pickles.png" /><p>Pickles</p></div>
+        </div>
+      </div>
+      <table id="nutrition_balloon">
+        <tr><td>Calories</td><td align="right">0</td><td>Cal</td></tr>
+        <tr><td>Fat</td><td align="right">0</td><td>g</td></tr>
+        <tr><td>Sugars</td><td align="right">0</td><td>g</td></tr>
+        <tr><td>Protein</td><td align="right">0</td><td>g</td></tr>
+        <tr><td>Vitamin C</td><td align="right">0</td><td>% DV</td></tr>
+      </table>
+      <div class="selection_transition_button disabled" id="back_button">< Back</div>
+      <div class="selection_transition_button" id="next_button">Next ></div>
+    </div>
+  </article>
+  <article id="info">
+    <h1>About</h1>
+    <p>I created this website because I had a hard time figuring out how to order at Subway.</p>
+  </article>
+  <footer>This is footer.</footer>
+  <script src="./assets/js/jquery-3.3.1.slim.min.js"></script>
+  <script src="./assets/js/menu_data.js"></script>
+  <script src="./assets/js/utility.js"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>
