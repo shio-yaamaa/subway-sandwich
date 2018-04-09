@@ -1,24 +1,42 @@
 /* global menuData */
 
-const snakeToCamel = snake => {
-  return snake.replace(
-    /(\_\w)/g,
-    m => m[1].toUpperCase()
-  );
+const snakeToCamel = snake => snake.replace(/(\_\w)/g, m => m[1].toUpperCase());
+const camelToSnake = camel => camel.split(/(?=[A-Z])/).join('_').toLowerCase();
+
+// Obtain item name from the item object
+const getItemName = object => {
+  let itemName;
+  Object.keys(menuData).forEach(currentSectionName => {
+    Object.keys(menuData[currentSectionName]).forEach(currentItemName => {
+      if (menuData[currentSectionName][currentItemName] === object) {
+        itemName = currentItemName;
+      }
+    });
+  });
+  return itemName;
 };
 
-const getSectionName = itemName => {
-	let sectionName = null;
-	Object.keys(menuData).forEach(element => {
-  	if (menuData[element].hasOwnProperty(itemName)) {
-    	sectionName = element;
+// item can be both the item name and the item object
+const getSectionName = item => {
+  const isStringGiven = typeof item === 'string';
+	let sectionName;
+	Object.keys(menuData).forEach(currentSectionName => {
+  	if (isStringGiven && menuData[currentSectionName].hasOwnProperty(item)) {
+    	sectionName = currentSectionName;
+    } else if (!isStringGiven && Object.keys(menuData[currentSectionName]).reduce((accumulator, currentItemKey) => {
+      return accumulator || menuData[currentSectionName][currentItemKey] === item;
+    }, false)) {
+      sectionName = currentSectionName;
     }
   });
   return sectionName;
 };
 
-const getNutritionFacts = itemName => {
-  return menuData[getSectionName(itemName)][itemName].nutrition;
+// item can be both the item name and the item object
+const getNutritionFacts = item => {
+  return typeof item === 'string'
+    ? menuData[getSectionName(item)][item].nutrition
+    : item.nutrition;
 };
 
 const calculateTotalNutrition = () => {

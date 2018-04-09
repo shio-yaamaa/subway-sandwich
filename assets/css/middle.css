@@ -3,3 +3,24 @@
   position: relative;
   background-color: lightgray;
 }
+
+#preview_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(244, 244, 244, 1);
+}
+
+#preview_container > * {
+  position: absolute;
+  transform-origin: top left;
+}
+
+#total_nutrition {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
