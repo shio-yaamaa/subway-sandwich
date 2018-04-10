@@ -34,9 +34,6 @@ selectionItems.map(element => {
       case 'breadSize':
         console.log('its bread size');
         break;
-      case 'toast':
-        console.log('toast or not');
-        break;
       default: // bread, meat, cheese, sauce, veggie
         const nutritionFacts = getNutritionFacts(snakeToCamel(element.id));
         for (let i = 0; i < nutritionBalloonTds.length; i++) {

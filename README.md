@@ -5,8 +5,6 @@ Amber500
 
 # Next
 
-Implement the preview function to make it easier to adjust the individual positions (only for 6 inch)
-
 Menu -> Ingredient
 
 Completely separate bread bottom and bread top. Only bread bottom has its nutrition facts. Bread top is just for "Done" display.

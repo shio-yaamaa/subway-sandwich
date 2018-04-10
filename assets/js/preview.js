@@ -2,6 +2,7 @@
 /* global FOOTLONG_STANDARD_SIZE */
 
 /* global menuData */
+/* global breadTopData */
 
 /* global camelToSnake */
 /* global getItemName */
@@ -13,7 +14,7 @@
 let previewScale;
 
 // Set previewContainer size
-// Must be executed after the change in sandwich size
+// Must be executed when the sandwich size is changed
 const setPreviewContainerSize = (isSixInch) => {
   const standardSize = isSixInch ? SIX_INCH_STANDARD_SIZE : FOOTLONG_STANDARD_SIZE;
   const isBoundByWidth = middle.clientWidth / standardSize[0] < middle.clientHeight / standardSize[1];
@@ -29,15 +30,15 @@ const setPreviewContainerSize = (isSixInch) => {
 }
 setPreviewContainerSize(true);
 
-const showIngredientPreview = (ingredient, isSixInch, isTop) => {
+const showIngredientPreview = (ingredient, isSixInch) => {
   const ingredientName = getItemName(ingredient);
   
   if (getSectionName(ingredientName) === 'bread') {
-    const imageName = `${camelToSnake(ingredientName)}_${isSixInch ? 'six_inch' : 'footlong'}_${isTop ? 'top' : 'bottom'}`;
+    const imageName = `${camelToSnake(ingredientName)}_${isSixInch ? 'six_inch' : 'footlong'}_bottom`;
     createPreviewImage(
       ingredientName,
       imageName,
-      ingredient.position[isTop ? 'top' : 'bottom'][isSixInch ? 'sixInch' : 'footlong'],
+      ingredient.position[isSixInch ? 'sixInch' : 'footlong'],
       previewScale,
       ingredient.order
     );
@@ -51,6 +52,21 @@ const showIngredientPreview = (ingredient, isSixInch, isTop) => {
       createPreviewImage(ingredientName, imageName, ingredient.position.footlong[0], previewScale, ingredient.order);
     }
   }
+};
+
+const showBreadTopPreview = () => {
+  const isSixInch = menuData.breadSize.sixInch.selected;
+  const breadName = Object.keys(menuData.bread).reduce((accumulator, currentBreadName) => {
+    return menuData.bread[currentBreadName].selected ? currentBreadName : accumulator;
+  }, undefined);
+  const imageName = `${camelToSnake(breadName)}_${isSixInch ? 'six_inch' : 'footlong'}_top`;
+  createPreviewImage(
+    'bread_top',
+    imageName,
+    breadTopData[breadName].position[isSixInch ? 'sixInch' : 'footlong'],
+    previewScale,
+    100
+  );
 };
 
 const createPreviewImage = (ingredientName, imageName, originalPosition, scale, order) => {
@@ -101,4 +117,14 @@ const hideIngredientPreview = ingredient => {
   });
 };
 
-showIngredientPreview(menuData.bread.italian, true, true);
+// Initialize the preview
+Object.keys(menuData).forEach(sectionName => {
+  if (sectionName != 'breadSize') {
+    Object.keys(menuData[sectionName]).forEach(ingredientName => {
+      const ingredient = menuData[sectionName][ingredientName];
+      if (ingredient.selected) {
+        showIngredientPreview(ingredient, menuData.breadSize.sixInch.selected, false);
+      }
+    });
+  }
+});

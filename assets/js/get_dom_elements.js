@@ -2,7 +2,6 @@ const questionContainers = [
   document.getElementById('bread_question_container'),
   document.getElementById('meat_question_container'),
   document.getElementById('cheese_question_container'),
-  document.getElementById('toast_question_container'),
   document.getElementById('sauce_question_container'),
   document.getElementById('veggie_question_container')
 ];
@@ -14,7 +13,6 @@ const selectionContainers = [ /* 名前使うようだったら一つ一つの�
   document.getElementById('bread_selection_container'),
   document.getElementById('meat_selection_container'),
   document.getElementById('cheese_selection_container'),
-  document.getElementById('toast_selection_container'),
   document.getElementById('sauce_selection_container'),
   document.getElementById('veggie_selection_container')
 ];

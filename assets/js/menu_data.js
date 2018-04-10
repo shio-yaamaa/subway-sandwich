@@ -1,28 +1,26 @@
-const NORMAL_BREAD_POSITION = {
-  top: {
-    sixInch: ['center', 105],
-    footlong: ['center', 105]
-  },
-  bottom: {
-    sixInch: ['center', 270],
-    footlong: ['center', 270]
-  }
+const NORMAL_BREAD_BOTTOM_POSITION = {
+  sixInch: ['center', 170],
+  footlong: ['center', 170]
 };
 
-const FLATBREAD_POSITION = {
-  top: {
-    sixInch: ['center', 110],
-    footlong: ['center', 0]
-  },
-  bottom: {
-    sixInch: ['center', 270],
-    footlong: ['center', 100]
-  }
+const NORMAL_BREAD_TOP_POSITION = {
+  sixInch: ['center', 5],
+  footlong: ['center', 5]
+};
+
+const FLATBREAD_BOTTOM_POSITION = {
+  sixInch: ['center', 170],
+  footlong: ['center', 170]
+};
+
+const FLATBREAD_TOP_POSITION = {
+  sixInch: ['center', 55],
+  footlong: ['center', 55]
 };
 
 const SAUCE_POSITION = {
-  sixInch: ['center', 210],
-  footlong: [[0, 0], [0, 0]]
+  sixInch: ['center', 110],
+  footlong: [[0, 110], [0, 110]]
 };
 
 const menuData = {
@@ -38,31 +36,31 @@ const menuData = {
     nineGrainWheat: {
       selected: true,
       nutrition: [210, 2, 5, 8, 0],
-      position: NORMAL_BREAD_POSITION,
+      position: NORMAL_BREAD_BOTTOM_POSITION,
       order: 0
     },
     multiGrainFlatbread: {
       selected: false,
       nutrition: [220, 5, 3, 8, 8],
-      position: FLATBREAD_POSITION,
+      position: FLATBREAD_BOTTOM_POSITION,
       order: 0
     },
     italian: {
       selected: false,
       nutrition: [200, 2.5, 3, 7, 0],
-      position: NORMAL_BREAD_POSITION,
+      position: NORMAL_BREAD_BOTTOM_POSITION,
       order: 0
     },
     italianHerbsAndCheese: {
       selected: false,
       nutrition: [240, 5, 3, 9, 0],
-      position: NORMAL_BREAD_POSITION,
+      position: NORMAL_BREAD_BOTTOM_POSITION,
       order: 0
     },
     flatbread: {
       selected: false,
       nutrition: [230, 4.5, 2, 7, 8],
-      position: FLATBREAD_POSITION,
+      position: FLATBREAD_BOTTOM_POSITION,
       order: 0
     }
   },
@@ -71,7 +69,7 @@ const menuData = {
       selected: false,
       nutrition: [100, 2.0, 2, 16, 8],
       position: {
-        sixInch: ['center', 240],
+        sixInch: ['center', 140],
         footlong: [[], []]
       },
       order: 1
@@ -80,7 +78,7 @@ const menuData = {
       selected: false,
       nutrition: [90, 2.5, 1, 15, 10],
       position: {
-        sixInch: ['center', 240],
+        sixInch: ['center', 140],
         footlong: [[], []]
       },
       order: 1
@@ -89,7 +87,7 @@ const menuData = {
       selected: false,
       nutrition: [50, 1.0, 1, 9, 0],
       position: {
-        sixInch: ['center', 240],
+        sixInch: ['center', 140],
         footlong: [[], []]
       },
       order: 1
@@ -98,7 +96,7 @@ const menuData = {
       selected: false,
       nutrition: [180, 14.0, 2, 11, 0],
       position: {
-        sixInch: ['center', 220],
+        sixInch: ['center', 120],
         footlong: [[], []]
       },
       order: 1
@@ -107,7 +105,7 @@ const menuData = {
       selected: false,
       nutrition: [250, 23.0, 0, 12, 0],
       position: {
-        sixInch: ['center', 240],
+        sixInch: ['center', 140],
         footlong: [[], []]
       },
       order: 1
@@ -116,7 +114,7 @@ const menuData = {
       selected: false,
       nutrition: [60, 2.0, 2, 9, 0],
       position: {
-        sixInch: ['center', 240],
+        sixInch: ['center', 140],
         footlong: [[], []]
       },
       order: 1
@@ -125,7 +123,7 @@ const menuData = {
       selected: false,
       nutrition: [260, 15.5, 6, 13, 14],
       position: {
-        sixInch: ['center', 235],
+        sixInch: ['center', 135],
         footlong: [[], []]
       },
       order: 1
@@ -136,7 +134,7 @@ const menuData = {
       selected: false,
       nutrition: [40, 3.5, 0, 2, 0],
       position: {
-        sixInch: ['center', 230],
+        sixInch: ['center', 130],
         footlong: [[], []]
       },
       order: 2
@@ -145,18 +143,10 @@ const menuData = {
       selected: false,
       nutrition: [50, 4.5, 0, 3, 0],
       position: {
-        sixInch: ['center', 200],
+        sixInch: ['center', 100],
         footlong: [[], []]
       },
       order: 3
-    }
-  },
-  toast: {
-    yes: {
-      selected: false
-    },
-    no: {
-      selected: true
     }
   },
   sauce: {
@@ -214,7 +204,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 195],
+        sixInch: ['center', 95],
         footlong: [[], []]
       },
       order: 8
@@ -223,7 +213,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 10],
       position: {
-        sixInch: ['center', 180],
+        sixInch: ['center', 80],
         footlong: [[], []]
       },
       order: 11
@@ -232,7 +222,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 180],
+        sixInch: ['center', 80],
         footlong: [[], []]
       },
       order: 7
@@ -241,7 +231,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 180],
+        sixInch: ['center', 80],
         footlong: [[], []]
       },
       order: 10
@@ -250,7 +240,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 4],
       position: {
-        sixInch: ['center', 185],
+        sixInch: ['center', 85],
         footlong: [[], []]
       },
       order: 6
@@ -259,7 +249,7 @@ const menuData = {
       selected: false,
       nutrition: [5, 0, 1, 0, 8],
       position: {
-        sixInch: ['center', 190],
+        sixInch: ['center', 90],
         footlong: [[], []]
       },
       order: 5
@@ -268,7 +258,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 4],
       position: {
-        sixInch: ['center', 190],
+        sixInch: ['center', 90],
         footlong: [[], []]
       },
       order: 12
@@ -277,7 +267,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 2],
       position: {
-        sixInch: ['center', 195],
+        sixInch: ['center', 95],
         footlong: [[], []]
       },
       order: 13
@@ -286,7 +276,7 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 195],
+        sixInch: ['center', 95],
         footlong: [[], []]
       },
       order: 14
@@ -295,10 +285,28 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 195],
+        sixInch: ['center', 95],
         footlong: [[], []]
       },
       order: 9
     }
+  }
+};
+
+const breadTopData = {
+  nineGrainWheat: {
+    position: NORMAL_BREAD_TOP_POSITION
+  },
+  multiGrainFlatbread: {
+    position: FLATBREAD_TOP_POSITION
+  },
+  italian: {
+    position: NORMAL_BREAD_TOP_POSITION
+  },
+  italianHerbsAndCheese: {
+    position: NORMAL_BREAD_TOP_POSITION
+  },
+  flatbread: {
+    position: FLATBREAD_TOP_POSITION
   }
 };

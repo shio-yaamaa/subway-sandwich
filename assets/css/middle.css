@@ -10,7 +10,7 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: rgba(244, 244, 244, 1);
+  border: 1px solid rgba(244, 244, 244, 1);
 }
 
 #preview_container > * {
