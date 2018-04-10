@@ -1,7 +1,6 @@
 #middle {
   grid-area: middle;
   position: relative;
-  background-color: lightgray;
 }
 
 #preview_container {

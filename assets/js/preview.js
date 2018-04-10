@@ -29,37 +29,76 @@ const setPreviewContainerSize = (isSixInch) => {
 }
 setPreviewContainerSize(true);
 
-const displayIngredient = (ingredient, isSixInch, isTop) => {
+const showIngredientPreview = (ingredient, isSixInch, isTop) => {
   const ingredientName = getItemName(ingredient);
   
   if (getSectionName(ingredientName) === 'bread') {
     const imageName = `${camelToSnake(ingredientName)}_${isSixInch ? 'six_inch' : 'footlong'}_${isTop ? 'top' : 'bottom'}`;
-    displayPreviewImage(
+    createPreviewImage(
+      ingredientName,
       imageName,
-      ingredient.position[isTop ? 'top' : 'bottom'][isSixInch ? 'six_inch' : 'footlong'],
-      previewScale
+      ingredient.position[isTop ? 'top' : 'bottom'][isSixInch ? 'sixInch' : 'footlong'],
+      previewScale,
+      ingredient.order
     );
   } else {
     const imageName = camelToSnake(ingredientName);
     if (isSixInch) {
-      displayPreviewImage(imageName, ingredient.position.six_inch, previewScale);
+      createPreviewImage(ingredientName, imageName, ingredient.position.sixInch, previewScale, ingredient.order);
     } else {
-      displayPreviewImage(imageName, ingredient.position.footlong[0], previewScale);
-      displayPreviewImage(imageName, ingredient.position.footlong[1], previewScale);
+      // The order is reversed to render the first half on the top
+      createPreviewImage(ingredientName, imageName, ingredient.position.footlong[1], previewScale, ingredient.order);
+      createPreviewImage(ingredientName, imageName, ingredient.position.footlong[0], previewScale, ingredient.order);
     }
   }
 };
 
-const displayPreviewImage = (imageName, originalPosition, scale) => {
+const createPreviewImage = (ingredientName, imageName, originalPosition, scale, order) => {
   const image = new Image();
+  image.style.visibility = 'hidden';
+  image.onload = () => {
+    image.style.transform = `scale(${previewScale})`;
+    
+    // Set the image position
+    // X
+    if (originalPosition[0] === 'center') {
+      image.style.left = `${(previewContainer.clientWidth - image.clientWidth * previewScale) / 2}px`;
+    } else {
+      image.style.left = `${originalPosition[0] * scale}px`;
+    }
+    
+    // Y
+    if (originalPosition[1] === 'center') {
+      image.style.top = `${(previewContainer.clientHeight - image.clientHeight * previewScale) / 2}px`
+    } else {
+      image.style.top = `${originalPosition[1] * scale}px`;
+    }
+    image.style.visibility = 'visible';
+  };
   image.src = `assets/img/${imageName}.svg`;
-  image.style.top = originalPosition[1] * scale + 'px';
-  image.style.left = originalPosition[0] * scale + 'px';
-  image.style.transform = `scale(${previewScale})`;
-  previewContainer.append(image);
+  image.classList.add(camelToSnake(ingredientName));
+  image.setAttribute('data-order', order.toString());
+  
+  // Insert the image to the appropriate depth
+  const inserted = Array.from(previewContainer.children).some(element => {
+    if (parseInt(element.getAttribute('data-order')) > order) {
+      previewContainer.insertBefore(image, element);
+      return true;
+    }
+    return false;
+  });
+  if (!inserted) {
+    previewContainer.append(image);
+  }
 };
 
-displayIngredient(menuData.bread.italian, true, false);
-displayIngredient(menuData.meat.italianBmt, true);
-displayIngredient(menuData.veggie.tomatoes, true);
-displayIngredient(menuData.veggie.cucumbers, true);
+const hideIngredientPreview = ingredient => {
+  const ingredientClass = camelToSnake(getItemName(ingredient));
+  Array.from(previewContainer.children).forEach(element => {
+    if (element.classList.contains(ingredientClass)) {
+      element.remove();
+    }
+  });
+};
+
+showIngredientPreview(menuData.bread.italian, true, true);

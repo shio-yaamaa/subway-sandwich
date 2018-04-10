@@ -3,6 +3,7 @@
 // Utilities
 
 /* global snakeToCamel */
+/* global getItemName */
 /* global getSectionName */
 /* global getNutritionFacts */
 
@@ -14,14 +15,22 @@
 /* global nutritionBalloon */
 /* global nutritionBalloonTds */
 
+// Preview
+
+/* global showIngredientPreview */
+/* global hideIngredientPreview */
+
 let currentPageIndex = 0;
 
 // Add event listeners to the selection items
 
 selectionItems.map(element => {
+  const ingredientName = snakeToCamel(element.id);
+  const sectionName = getSectionName(ingredientName);
+  
   element.addEventListener('mouseenter', () => {
     // update the nutrition information
-    switch (getSectionName(snakeToCamel(element.id))) {
+    switch (sectionName) {
       case 'breadSize':
         console.log('its bread size');
         break;
@@ -47,29 +56,62 @@ selectionItems.map(element => {
   element.addEventListener('mouseleave', () => {
     nutritionBalloon.style.opacity = 0;
   })
+  
+  element.addEventListener('click', () => {
+    selectIngredient(menuData[sectionName][ingredientName]);
+  });
 });
 
-// section: 'breadSize', 'bread', 'meat', ...
-const select = (section, selection) => {
-  // If the section only allows single choice, make all the options false
-  switch (section) {
-    case 'breadSize':
-      break;
-    case 'bread':
-      break;
-    case 'meat':
-      break;
-    case 'toast':
-      break;
+const selectIngredient = ingredient => {
+  const sectionName = getSectionName(ingredient);
+  const ingredientName = getItemName(ingredient);
+  if (ingredient.selected) { // the ingredient is already selected
+    /* breadSize -> stay
+       bread -> stay
+       meat -> remove
+       cheese -> remove
+       sauce -> remove
+       veggie -> remove */
+    if (sectionName === 'breadSize' || sectionName === 'bread') { // stay
+      return;
+    } else { // remove
+      ingredient.selected = false;
+      hideIngredientPreview(ingredient);
+    }
+  } else {
+    /* breadSize -> switch + change all the preview images
+       bread -> switch
+       meat -> switch
+       cheese -> add
+       sauce -> add
+       veggie -> add */
+    if (sectionName === 'breadSize') {
+      // implement later
+    } else if (sectionName === 'bread' || sectionName === 'meat') { // switch
+      Object.keys(menuData[sectionName]).forEach(currentIngredientName => {
+        if (currentIngredientName === ingredientName) {
+          menuData[sectionName][currentIngredientName].selected = true;
+          showIngredientPreview(
+            menuData[sectionName][currentIngredientName],
+            menuData.breadSize.sixInch.selected,
+            false
+          );
+        } else {
+          menuData[sectionName][currentIngredientName].selected = false;
+          hideIngredientPreview(menuData[sectionName][currentIngredientName]);
+        }
+      });
+    } else { // add
+      ingredient.selected = true;
+      showIngredientPreview(ingredient, menuData.breadSize.sixInch.selected);
+    }
   }
   
   // Make the selected option true
   
-  // Update the circle border
+  // Update the circle border color
   
   // Update the preview
 
   // Update nutrition facts
-  
-  // Play SE
 };
