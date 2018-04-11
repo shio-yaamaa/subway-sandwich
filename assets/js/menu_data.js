@@ -1,3 +1,5 @@
+/* global FOOTLONG_STANDARD_SIZE */
+
 const NORMAL_BREAD_BOTTOM_POSITION = {
   sixInch: ['center', 170],
   footlong: ['center', 170]
@@ -20,16 +22,16 @@ const FLATBREAD_TOP_POSITION = {
 
 const SAUCE_POSITION = {
   sixInch: ['center', 110],
-  footlong: [[0, 110], [0, 110]]
+  footlong: [[(FOOTLONG_STANDARD_SIZE[0] - (-12)) / 2 - 455, 110], [(FOOTLONG_STANDARD_SIZE[0] + (-12)) / 2, 110]]
 };
 
 const menuData = {
   breadSize: {
     sixInch: {
-      selected: true
+      selected: false
     },
     footlong: {
-      selected: false
+      selected: true
     }
   },
   bread: {
@@ -70,16 +72,16 @@ const menuData = {
       nutrition: [100, 2.0, 2, 16, 8],
       position: {
         sixInch: ['center', 140],
-        footlong: [[], []]
+        footlong: [[(FOOTLONG_STANDARD_SIZE[0] - (-35)) / 2 - 455, 140], [(FOOTLONG_STANDARD_SIZE[0] + (-35)) / 2, 140]]
       },
       order: 1
     },
     ovenRoastedChicken: {
-      selected: false,
+      selected: true,
       nutrition: [90, 2.5, 1, 15, 10],
       position: {
         sixInch: ['center', 140],
-        footlong: [[], []]
+        footlong: [[(FOOTLONG_STANDARD_SIZE[0] - (-35)) / 2 - 455, 140], [(FOOTLONG_STANDARD_SIZE[0] + (-35)) / 2, 140]]
       },
       order: 1
     },

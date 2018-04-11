@@ -6,6 +6,8 @@
 /* global getItemName */
 /* global getSectionName */
 /* global getNutritionFacts */
+/* global multiplyNutrition */
+/* global updateNutritionFacts */
 
 // DOM Elements
 
@@ -19,6 +21,7 @@
 
 /* global showIngredientPreview */
 /* global hideIngredientPreview */
+/* global changePreviewBreadSize */
 
 let currentPageIndex = 0;
 
@@ -32,12 +35,14 @@ selectionItems.map(element => {
     // update the nutrition information
     switch (sectionName) {
       case 'breadSize':
-        console.log('its bread size');
         break;
       default: // bread, meat, cheese, sauce, veggie
-        const nutritionFacts = getNutritionFacts(snakeToCamel(element.id));
+        const nutritionFacts = multiplyNutrition(
+          getNutritionFacts(snakeToCamel(element.id)),
+          menuData.breadSize.sixInch.selected ? 1 : 2
+        );
         for (let i = 0; i < nutritionBalloonTds.length; i++) {
-          nutritionBalloonTds[i].textContent = nutritionFacts[i] * (menuData.breadSize.sixInch.selected ? 1 : 2);
+          nutritionBalloonTds[i].textContent = nutritionFacts[i];
         }
     }
     
@@ -83,7 +88,9 @@ const selectIngredient = ingredient => {
        sauce -> add
        veggie -> add */
     if (sectionName === 'breadSize') {
-      // implement later
+      menuData.breadSize.sixInch.selected = !menuData.breadSize.sixInch.selected;
+      menuData.breadSize.footlong.selected = !menuData.breadSize.footlong.selected;
+      changePreviewBreadSize(menuData.breadSize.sixInch.selected);
     } else if (sectionName === 'bread' || sectionName === 'meat') { // switch
       Object.keys(menuData[sectionName]).forEach(currentIngredientName => {
         if (currentIngredientName === ingredientName) {
@@ -104,11 +111,8 @@ const selectIngredient = ingredient => {
     }
   }
   
-  // Make the selected option true
-  
   // Update the circle border color
-  
-  // Update the preview
 
   // Update nutrition facts
+  updateNutritionFacts();
 };

@@ -5,6 +5,8 @@ Amber500
 
 # Next
 
+Set offsets (Italian herbs and cheese top, sauce, peppers)
+
 Menu -> Ingredient
 
 Completely separate bread bottom and bread top. Only bread bottom has its nutrition facts. Bread top is just for "Done" display.
@@ -12,6 +14,26 @@ Completely separate bread bottom and bread top. Only bread bottom has its nutrit
 # Todo
 
 - Make the background color of the bread images pure white
+
+- Window resize event
+
+- Total nutrition facts -> background: half-transparent white, some blur
+
+- If ingredientData's structure becomes like following,
+
+```javascript
+bread: [
+  {
+    name: 'italian_herbs_and_cheese',
+    selected: false,
+    ...
+  }
+]
+```
+
+  then I no longer have to convert camel to snake or vice versa
+
+- Change the values of the nutrition balloon when breadSize is hovered
 
 # Note
 

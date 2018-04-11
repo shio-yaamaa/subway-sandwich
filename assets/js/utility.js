@@ -39,6 +39,21 @@ const getNutritionFacts = item => {
     : item.nutrition;
 };
 
-const calculateTotalNutrition = () => {
-  let sixInchNutrition = [0, 0, 0, 0, 0]
+const computeTotalNutrition = () => {
+  const sixInchNutrition = [0, 0, 0, 0, 0];
+  
+  return multiplyNutrition(sixInchNutrition, menuData.breadSize.sixInch.selected ? 1 : 2);
+};
+
+const addNutrition = (nutrition1, nutrition2) => {
+  return nutrition1.map((element, index) => element + nutrition2[index]);
+};
+
+const multiplyNutrition = (nutrition, scalar) => {
+  return nutrition.map(element => element * scalar);
+};
+
+const updateNutritionFacts = () => {
+  const totalNutrition = computeTotalNutrition();
+  
 };
