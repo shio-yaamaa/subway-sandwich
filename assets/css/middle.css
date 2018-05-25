@@ -3,7 +3,7 @@
   position: relative;
 }
 
-#preview_container {
+#preview-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -13,13 +13,14 @@
   border: 1px solid rgba(244, 244, 244, 1);
 }
 
-#preview_container > * {
+#preview-container > * {
   position: absolute;
-  transform-origin: top left;
 }
 
-#total_nutrition {
+#total-nutrition {
   position: absolute;
   right: 0;
   bottom: 0;
+  padding: 1vw 2vw;
+  background-color: rgba(255, 255, 255, 0.7);
 }

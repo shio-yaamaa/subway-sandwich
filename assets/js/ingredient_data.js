@@ -1,37 +1,38 @@
 /* global FOOTLONG_STANDARD_SIZE */
 
 const NORMAL_BREAD_BOTTOM_POSITION = {
-  sixInch: ['center', 170],
-  footlong: ['center', 170]
+  y: 170,
+  offset: [0, 0]
 };
 
 const NORMAL_BREAD_TOP_POSITION = {
-  sixInch: ['center', 5],
-  footlong: ['center', 5]
+  y: 5,
+  offset: [0, 0]
 };
 
 const FLATBREAD_BOTTOM_POSITION = {
-  sixInch: ['center', 170],
-  footlong: ['center', 170]
+  y: 170,
+  offset: [0, 0]
 };
 
 const FLATBREAD_TOP_POSITION = {
-  sixInch: ['center', 55],
-  footlong: ['center', 55]
+  y: 55,
+  offset: [0, 0]
 };
 
 const SAUCE_POSITION = {
-  sixInch: ['center', 110],
-  footlong: [[(FOOTLONG_STANDARD_SIZE[0] - (-12)) / 2 - 455, 110], [(FOOTLONG_STANDARD_SIZE[0] + (-12)) / 2, 110]]
+  y: 110,
+  footlongDistance: -14,
+  offset: [0, 0]
 };
 
-const menuData = {
+const ingredientData = {
   breadSize: {
     sixInch: {
-      selected: false
+      selected: true
     },
     footlong: {
-      selected: true
+      selected: false
     }
   },
   bread: {
@@ -71,17 +72,19 @@ const menuData = {
       selected: false,
       nutrition: [100, 2.0, 2, 16, 8],
       position: {
-        sixInch: ['center', 140],
-        footlong: [[(FOOTLONG_STANDARD_SIZE[0] - (-35)) / 2 - 455, 140], [(FOOTLONG_STANDARD_SIZE[0] + (-35)) / 2, 140]]
+        y: 140,
+        footlongDistance: -23,
+        offset: [0, 0]
       },
       order: 1
     },
     ovenRoastedChicken: {
-      selected: true,
+      selected: false,
       nutrition: [90, 2.5, 1, 15, 10],
       position: {
-        sixInch: ['center', 140],
-        footlong: [[(FOOTLONG_STANDARD_SIZE[0] - (-35)) / 2 - 455, 140], [(FOOTLONG_STANDARD_SIZE[0] + (-35)) / 2, 140]]
+        y: 140,
+        footlongDistance: 30,
+        offset: [0, 0]
       },
       order: 1
     },
@@ -89,8 +92,9 @@ const menuData = {
       selected: false,
       nutrition: [50, 1.0, 1, 9, 0],
       position: {
-        sixInch: ['center', 140],
-        footlong: [[], []]
+        y: 140,
+        footlongDistance: -48,
+        offset: [0, 0]
       },
       order: 1
     },
@@ -98,8 +102,9 @@ const menuData = {
       selected: false,
       nutrition: [180, 14.0, 2, 11, 0],
       position: {
-        sixInch: ['center', 120],
-        footlong: [[], []]
+        y: 120,
+        footlongDistance: -67,
+        offset: [0, 0]
       },
       order: 1
     },
@@ -107,8 +112,9 @@ const menuData = {
       selected: false,
       nutrition: [250, 23.0, 0, 12, 0],
       position: {
-        sixInch: ['center', 140],
-        footlong: [[], []]
+        y: 140,
+        footlongDistance: -49,
+        offset: [0, 0]
       },
       order: 1
     },
@@ -116,8 +122,9 @@ const menuData = {
       selected: false,
       nutrition: [60, 2.0, 2, 9, 0],
       position: {
-        sixInch: ['center', 140],
-        footlong: [[], []]
+        y: 140,
+        footlongDistance: -48,
+        offset: [0, 0]
       },
       order: 1
     },
@@ -125,8 +132,9 @@ const menuData = {
       selected: false,
       nutrition: [260, 15.5, 6, 13, 14],
       position: {
-        sixInch: ['center', 135],
-        footlong: [[], []]
+        y: 135,
+        footlongDistance: -16,
+        offset: [0, 0]
       },
       order: 1
     }
@@ -136,8 +144,9 @@ const menuData = {
       selected: false,
       nutrition: [40, 3.5, 0, 2, 0],
       position: {
-        sixInch: ['center', 130],
-        footlong: [[], []]
+        y: 130,
+        footlongDistance: 34,
+        offset: [0, 0]
       },
       order: 2
     },
@@ -145,57 +154,58 @@ const menuData = {
       selected: false,
       nutrition: [50, 4.5, 0, 3, 0],
       position: {
-        sixInch: ['center', 100],
-        footlong: [[], []]
+        y: 100,
+        footlongDistance: -31,
+        offset: [0, 0]
       },
       order: 3
     }
   },
   sauce: {
     chipotleSouthwest: {
-      selected: false,
+      selected: true,
       nutrition: [100, 10, 1, 0, 0],
-      position: SAUCE_POSITION,
+      position: Object.assign({}, SAUCE_POSITION, {offset: [-15, -3]}),
       order: 4
     },
     mayonnaise: {
-      selected: false,
+      selected: true,
       nutrition: [110, 12, 0, 0, 0],
-      position: SAUCE_POSITION,
+      position: Object.assign({}, SAUCE_POSITION, {offset: [25, 6]}),
       order: 4
     },
     ranch: {
-      selected: false,
+      selected: true,
       nutrition: [110, 11, 1, 0, 0],
-      position: SAUCE_POSITION,
+      position: Object.assign({}, SAUCE_POSITION, {offset: [-2, 9]}),
       order: 4
     },
     oil: {
-      selected: false,
+      selected: true,
       nutrition: [45, 5, 0, 0, 0],
-      position: SAUCE_POSITION,
+      position: Object.assign({}, SAUCE_POSITION, {offset: [-10, 7]}),
       order: 4
     },
     vinaigrette: {
-      selected: false,
+      selected: true,
       nutrition: [40, 4, 1, 0, 0],
-      position: SAUCE_POSITION,
+      position: Object.assign({}, SAUCE_POSITION, {offset: [-3, -8]}),
       order: 4
     },
     mustard: {
-      selected: false,
+      selected: true,
       nutrition: [5, 0, 0, 0, 0],
-      position: SAUCE_POSITION,
+      position: Object.assign({}, SAUCE_POSITION, {offset: [9, 1]}),
       order: 4
     },
     vinegar: {
-      selected: false,
+      selected: true,
       nutrition: [0, 0, 0, 0, 0],
-      position: SAUCE_POSITION,
+      position: Object.assign({}, SAUCE_POSITION, {offset: [13, -5]}),
       order: 4
     },
     sweetOnion: {
-      selected: false,
+      selected: true,
       nutrition: [40, 0, 8, 0, 0],
       position: SAUCE_POSITION,
       order: 4
@@ -206,8 +216,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 95],
-        footlong: [[], []]
+        y: 95,
+        footlongDistance: -14,
+        offset: [0, 0]
       },
       order: 8
     },
@@ -215,8 +226,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 10],
       position: {
-        sixInch: ['center', 80],
-        footlong: [[], []]
+        y: 80,
+        footlongDistance: -32,
+        offset: [-3, -2]
       },
       order: 11
     },
@@ -224,8 +236,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 80],
-        footlong: [[], []]
+        y: 80,
+        footlongDistance: -26,
+        offset: [0, 0]
       },
       order: 7
     },
@@ -233,8 +246,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 80],
-        footlong: [[], []]
+        y: 80,
+        footlongDistance: -32,
+        offset: [3, 3]
       },
       order: 10
     },
@@ -242,8 +256,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 4],
       position: {
-        sixInch: ['center', 85],
-        footlong: [[], []]
+        y: 85,
+        footlongDistance: 0,
+        offset: [0, 0]
       },
       order: 6
     },
@@ -251,8 +266,9 @@ const menuData = {
       selected: false,
       nutrition: [5, 0, 1, 0, 8],
       position: {
-        sixInch: ['center', 90],
-        footlong: [[], []]
+        y: 90,
+        footlongDistance: 9,
+        offset: [0, 0]
       },
       order: 5
     },
@@ -260,8 +276,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 4],
       position: {
-        sixInch: ['center', 90],
-        footlong: [[], []]
+        y: 90,
+        footlongDistance: 15,
+        offset: [0, 0]
       },
       order: 12
     },
@@ -269,8 +286,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 2],
       position: {
-        sixInch: ['center', 95],
-        footlong: [[], []]
+        y: 95,
+        footlongDistance: 18,
+        offset: [0, 0]
       },
       order: 13
     },
@@ -278,8 +296,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 95],
-        footlong: [[], []]
+        y: 95,
+        footlongDistance: 28,
+        offset: [0, 0]
       },
       order: 14
     },
@@ -287,8 +306,9 @@ const menuData = {
       selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: {
-        sixInch: ['center', 95],
-        footlong: [[], []]
+        y: 95,
+        footlongDistance: 13,
+        offset: [0, 0]
       },
       order: 9
     }

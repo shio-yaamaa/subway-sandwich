@@ -1,13 +1,14 @@
-/* global menuData */
+/* global ingredientData */
 
 // Utilities
 
-/* global snakeToCamel */
+/* global kebabToCamel */
+/* global getItemDomElement */
 /* global getItemName */
 /* global getSectionName */
 /* global getNutritionFacts */
 /* global multiplyNutrition */
-/* global updateNutritionFacts */
+/* global updateTotalNutrition */
 
 // DOM Elements
 
@@ -23,23 +24,22 @@
 /* global hideIngredientPreview */
 /* global changePreviewBreadSize */
 
-let currentPageIndex = 0;
-
 // Add event listeners to the selection items
 
 selectionItems.map(element => {
-  const ingredientName = snakeToCamel(element.id);
+  const ingredientName = kebabToCamel(element.id);
   const sectionName = getSectionName(ingredientName);
   
   element.addEventListener('mouseenter', () => {
-    // update the nutrition information
+    // Update the nutrition balloon
     switch (sectionName) {
       case 'breadSize':
+        // TODO
         break;
       default: // bread, meat, cheese, sauce, veggie
         const nutritionFacts = multiplyNutrition(
-          getNutritionFacts(snakeToCamel(element.id)),
-          menuData.breadSize.sixInch.selected ? 1 : 2
+          getNutritionFacts(kebabToCamel(element.id)),
+          ingredientData.breadSize.sixInch.selected ? 1 : 2
         );
         for (let i = 0; i < nutritionBalloonTds.length; i++) {
           nutritionBalloonTds[i].textContent = nutritionFacts[i];
@@ -60,24 +60,36 @@ selectionItems.map(element => {
   })
   
   element.addEventListener('click', () => {
-    selectIngredient(menuData[sectionName][ingredientName]);
+    selectIngredient(ingredientData[sectionName][ingredientName]);
   });
 });
+
+const toggleSelectedness = (ingredient, selected) => {
+  // Change the "selected" property in ingredientData
+  ingredient.selected = selected;
+  
+  // Toggle the class of the DOM element
+  if (selected) {
+    getItemDomElement(ingredient).classList.add('selected');
+  } else {
+    getItemDomElement(ingredient).classList.remove('selected');
+  }
+};
 
 const selectIngredient = ingredient => {
   const sectionName = getSectionName(ingredient);
   const ingredientName = getItemName(ingredient);
-  if (ingredient.selected) { // the ingredient is already selected
+  if (ingredient.selected) { // The ingredient is already selected
     /* breadSize -> stay
        bread -> stay
        meat -> remove
        cheese -> remove
        sauce -> remove
        veggie -> remove */
-    if (sectionName === 'breadSize' || sectionName === 'bread') { // stay
+    if (sectionName === 'breadSize' || sectionName === 'bread') { // Stay
       return;
-    } else { // remove
-      ingredient.selected = false;
+    } else { // Remove
+      toggleSelectedness(ingredient, false);
       hideIngredientPreview(ingredient);
     }
   } else {
@@ -88,31 +100,31 @@ const selectIngredient = ingredient => {
        sauce -> add
        veggie -> add */
     if (sectionName === 'breadSize') {
-      menuData.breadSize.sixInch.selected = !menuData.breadSize.sixInch.selected;
-      menuData.breadSize.footlong.selected = !menuData.breadSize.footlong.selected;
-      changePreviewBreadSize(menuData.breadSize.sixInch.selected);
-    } else if (sectionName === 'bread' || sectionName === 'meat') { // switch
-      Object.keys(menuData[sectionName]).forEach(currentIngredientName => {
+      toggleSelectedness(ingredientData.breadSize.sixInch, !ingredientData.breadSize.sixInch.selected);
+      toggleSelectedness(ingredientData.breadSize.footlong, !ingredientData.breadSize.footlong.selected);
+      changePreviewBreadSize(ingredientData.breadSize.sixInch.selected);
+    } else if (sectionName === 'bread' || sectionName === 'meat') { // Switch
+      Object.keys(ingredientData[sectionName]).forEach(currentIngredientName => {
         if (currentIngredientName === ingredientName) {
-          menuData[sectionName][currentIngredientName].selected = true;
+          toggleSelectedness(ingredientData[sectionName][currentIngredientName], true);
           showIngredientPreview(
-            menuData[sectionName][currentIngredientName],
-            menuData.breadSize.sixInch.selected,
+            ingredientData[sectionName][currentIngredientName],
+            ingredientData.breadSize.sixInch.selected,
             false
           );
         } else {
-          menuData[sectionName][currentIngredientName].selected = false;
-          hideIngredientPreview(menuData[sectionName][currentIngredientName]);
+          toggleSelectedness(ingredientData[sectionName][currentIngredientName], false);
+          hideIngredientPreview(ingredientData[sectionName][currentIngredientName]);
         }
       });
-    } else { // add
-      ingredient.selected = true;
-      showIngredientPreview(ingredient, menuData.breadSize.sixInch.selected);
+    } else { // Add
+      toggleSelectedness(ingredient, true);
+      showIngredientPreview(ingredient, ingredientData.breadSize.sixInch.selected);
     }
   }
   
-  // Update the circle border color
-
   // Update nutrition facts
-  updateNutritionFacts();
+  updateTotalNutrition();
 };
+
+updateTotalNutrition();

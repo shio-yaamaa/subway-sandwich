@@ -1,14 +1,13 @@
 #lower {
   grid-area: lower;
   position: relative;
-  background-color: orange;
 }
 
 #lower > * {
   position: absolute;
 }
 
-.selection_container {
+.selection-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -20,47 +19,47 @@
   background-color: white;
 }
 
-.selection_container:first-child {
+.selection-container:first-child {
   left: 0;
 }
 
-.selection_container:not(:first-child) {
+.selection-container:not(:first-child) {
   left: 100vw;
 }
 
-.selection_grid_container {
+.selection-grid-container {
   display: grid;
 }
 
-#bread_size_grid_container {
+#bread-size-grid-container {
   grid-template-columns: repeat(2, 12vw);
 }
 
-#bread_grid_container {
+#bread-grid-container {
   grid-template-columns: repeat(3, 12vw);
   grid-template-rows: repeat(2, 10vw);
 }
 
-#meat_grid_container {
+#meat-grid-container {
   grid-template-columns: repeat(4, 12vw);
   grid-template-rows: repeat(2, 10vw);
 }
 
-#cheese_grid_container {
+#cheese-grid-container {
   grid-template-columns: repeat(2, 12vw);
 }
 
-#sauce_grid_container {
+#sauce-grid-container {
   grid-template-columns: repeat(4, 12vw);
   grid-template-rows: repeat(2, 10vw);
 }
 
-#veggie_grid_container {
+#veggie-grid-container {
   grid-template-columns: repeat(5, 12vw);
   grid-template-rows: repeat(2, 10vw);
 }
 
-.selection_item {
+.selection-item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,38 +68,34 @@
   cursor: pointer;
 }
 
-.selection_item:hover {
+.selection-item:hover {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-.selection_item > img {
+.selection-item > img {
   width: 6vw;
   height: 6vw;
   border-radius: 50%;
   border: 0.3vw solid #eeeeee;
 }
 
-/* default selection */
-#bread_size_grid_container > .selection_item:first-child > img {
-  border: 0.3vw solid #FFC107;
-}
-#bread_grid_container > .selection_item:first-child > img {
+.selection-item.selected > img {
   border: 0.3vw solid #FFC107;
 }
 
-.selection_grid_container p {
+.selection-grid-container p {
   overflow-wrap: break-word;
 	text-align: center;
 }
 
-.selection_transition_button {
+.selection-transition-button {
   bottom: 2vw;
   font-size: 2vw;
   font-weight: bold;
   cursor: default;
 }
 
-#toast_grid_container > .selection_item {
+#toast-grid-container > .selection-item {
   margin: 0.5vw 0;
   padding: 1vw 1.5vw;
   border-radius: 10vw;
@@ -108,13 +103,13 @@
 }
 
 /* default selection */
-#toast_grid_container > .selection_item:last-child {
+#toast-grid-container > .selection-item:last-child {
   border: 0.3vw solid #FFC107;
 }
 
 /* nutrition balloon */
 
-#nutrition_balloon {
+#nutrition-balloon {
   bottom: 0;
   left: 0;
   padding: 0.3vw;
@@ -127,7 +122,7 @@
   transition: all 0s;
 }
 
-#nutrition_balloon:after {
+#nutrition-balloon:after {
   content: "";
 	position: absolute;
 	bottom: -2.2vw;
@@ -139,22 +134,22 @@
 
 /* selection transition buttons */
 
-.selection_transition_button:not(.disabled) {
+.selection-transition-button:not(.disabled) {
   cursor: pointer;
 }
 
-#back_button {
+#back-button {
   left: 2vw;
 }
 
-#next_button {
+#next-button {
   right: 2vw;
 }
 
-.selection_transition_button.disabled {
+.selection-transition-button.disabled {
   color: #9E9E9E;
 }
 
-.selection_transition_button:not(.disabled):hover {
+.selection-transition-button:not(.disabled):hover {
   color: #616161;
 }

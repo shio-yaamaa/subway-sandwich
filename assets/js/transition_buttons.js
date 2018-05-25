@@ -1,10 +1,10 @@
-/* global currentPageIndex */
-
 /* global backButton */
 /* global nextButton */
 
 /* global questionContainers */
 /* global selectionContainers */
+
+let currentPageIndex = 0;
 
 backButton.addEventListener('click', () => {
   if (currentPageIndex === 0) {
@@ -52,7 +52,7 @@ nextButton.addEventListener('click', () => {
     nextButton.classList.add('disabled');
   }
   
-  // if the previous page was the first page, enable the back button
+  // If the previous page was the first page, enable the back button
   if (currentPageIndex - 1 === 0) {
     backButton.classList.remove('disabled');
   }

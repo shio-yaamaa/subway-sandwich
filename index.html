@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-	<title>Subway Nutrition Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Subway Order Simulator & Nutrition Calculator</title>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/upper.css">
@@ -12,26 +13,29 @@
 <body>
   <article id="main">
     <div id="upper">
-      <div class="question_container" id="bread_question_container">
+      <div class="question-container" id="bread-question-container">
         <div class="question">What kind of bread?</div>
       </div>
-      <div class="question_container" id="meat_question_container">
+      <div class="question-container" id="meat-question-container">
         <div class="question">What kind of meat?</div>
       </div>
-      <div class="question_container" id="cheese_question_container">
+      <div class="question-container" id="cheese-question-container">
         <div class="question">Cheese?</div>
       </div>
-      <div class="question_container" id="sauce_question_container">
+      <div class="question-container" id="sauce-question-container">
         <div class="question">Sauce?</div>
       </div>
-      <div class="question_container" id="veggie_question_container">
+      <div class="question-container" id="veggie-question-container">
         <div class="question">Vegetables?</div>
+      </div>
+      <div class="question-container">
+        <div class="question">Thank you!</div>
       </div>
     </div>
     
     <div id="middle">
-      <div id="preview_container"></div>
-      <table id="total_nutrition">
+      <div id="preview-container"></div>
+      <table id="total-nutrition">
         <tr><td>Calories</td><td align="right">0</td><td>Cal</td></tr>
         <tr><td>Fat</td><td align="right">0</td><td>g</td></tr>
         <tr><td>Sugars</td><td align="right">0</td><td>g</td></tr>
@@ -41,71 +45,74 @@
     </div>
     
     <div id="lower">
-      <div class="selection_container" id="bread_selection_container">
-        <div class="selection_grid_container" id="bread_size_grid_container">
-          <div class="selection_item" id="six_inch"><img src="./assets/img/six_inch.png" /><p>6 inch</p></div>
-          <div class="selection_item" id="footlong"><img src="./assets/img/footlong.png" /><p>Footlong</p></div>
+      <div class="selection-container" id="bread-selection-container">
+        <div class="selection-grid-container" id="bread-size-grid-container">
+          <div class="selection-item selected" id="six-inch"><img src="./assets/img/thumbnail/six-inch.png" /><p>6 inch</p></div>
+          <div class="selection-item" id="footlong"><img src="./assets/img/thumbnail/footlong.png" /><p>Footlong</p></div>
         </div>
-        <div class="selection_grid_container" id="bread_grid_container">
-          <div class="selection_item" id="nine_grain_wheat"><img src="./assets/img/nine_grain_wheat.png" /><p>9-Grain Wheat</p></div>
-          <div class="selection_item" id="multi_grain_flatbread"><img src="./assets/img/multi_grain_flatbread.png" /><p>Multi-grain Flatbread</p></div>
-          <div class="selection_item" id="italian"><img src="./assets/img/italian.png" /><p>Italian</p></div>
-          <div class="selection_item" id="italian_herbs_and_cheese"><img src="./assets/img/italian_herbs_and_cheese.png" /><p>Italian Herbs & Cheese</p></div>
-          <div class="selection_item" id="flatbread"><img src="./assets/img/flatbread.png" /><p>Flatbread</p></div>
-        </div>
-      </div>
-      <div class="selection_container" id="meat_selection_container">
-        <div class="selection_grid_container" id="meat_grid_container">
-          <div class="selection_item" id="sweet_onion_chicken_teriyaki"><img src="./assets/img/sweet_onion_chicken_teriyaki.png" /><p>Sweet Onion Chicken Teriyaki</p></div>
-          <div class="selection_item" id="oven_roasted_chicken"><img src="./assets/img/oven_roasted_chicken.png" /><p>Oven Roasted Chicken</p></div>
-          <div class="selection_item" id="turkey_breast"><img src="./assets/img/turkey_breast.png" /><p>Turkey Breast</p></div>
-          <div class="selection_item" id="italian_bmt"><img src="./assets/img/italian_bmt.png" /><p>Italian BMT</p></div>
-          <div class="selection_item" id="tuna"><img src="./assets/img/tuna.png" /><p>Tuna</p></div>
-          <div class="selection_item" id="black_forest_ham"><img src="./assets/img/black_forest_ham.png" /><p>Black Forest Ham</p></div>
-          <div class="selection_item" id="meatball_marinara"><img src="./assets/img/meatball_marinara.png" /><p>Meatball Marinara</p></div>
+        <div class="selection-grid-container" id="bread-grid-container">
+          <div class="selection-item selected" id="nine-grain-wheat"><img src="./assets/img/thumbnail/nine-grain-wheat.png" /><p>9-Grain Wheat</p></div>
+          <div class="selection-item" id="multi-grain-flatbread"><img src="./assets/img/thumbnail/multi-grain-flatbread.png" /><p>Multi-grain Flatbread</p></div>
+          <div class="selection-item" id="italian"><img src="./assets/img/thumbnail/italian.png" /><p>Italian</p></div>
+          <div class="selection-item" id="italian-herbs-and-cheese"><img src="./assets/img/thumbnail/italian-herbs-and-cheese.png" /><p>Italian Herbs & Cheese</p></div>
+          <div class="selection-item" id="flatbread"><img src="./assets/img/thumbnail/flatbread.png" /><p>Flatbread</p></div>
         </div>
       </div>
-      <div class="selection_container" id="cheese_selection_container">
-        <div class="selection_grid_container" id="cheese_grid_container">
-          <div class="selection_item" id="american"><img src="./assets/img/american.png" /><p>American</p></div>
-          <div class="selection_item" id="monterey_cheddar"><img src="./assets/img/monterey_cheddar.png" /><p>Monterey Cheddar</p></div>
+      <div class="selection-container" id="meat-selection-container">
+        <div class="selection-grid-container" id="meat-grid-container">
+          <div class="selection-item" id="sweet-onion-chicken-teriyaki"><img src="./assets/img/thumbnail/sweet-onion-chicken-teriyaki.png" /><p>Sweet Onion Chicken Teriyaki</p></div>
+          <div class="selection-item" id="oven-roasted-chicken"><img src="./assets/img/thumbnail/oven-roasted-chicken.png" /><p>Oven Roasted Chicken</p></div>
+          <div class="selection-item" id="turkey-breast"><img src="./assets/img/thumbnail/turkey-breast.png" /><p>Turkey Breast</p></div>
+          <div class="selection-item" id="italian-bmt"><img src="./assets/img/thumbnail/italian-bmt.png" /><p>Italian BMT</p></div>
+          <div class="selection-item" id="tuna"><img src="./assets/img/thumbnail/tuna.png" /><p>Tuna</p></div>
+          <div class="selection-item" id="black-forest-ham"><img src="./assets/img/thumbnail/black-forest-ham.png" /><p>Black Forest Ham</p></div>
+          <div class="selection-item" id="meatball-marinara"><img src="./assets/img/thumbnail/meatball-marinara.png" /><p>Meatball Marinara</p></div>
         </div>
       </div>
-      <div class="selection_container" id="sauce_selection_container">
-        <div class="selection_grid_container" id="sauce_grid_container">
-          <div class="selection_item" id="chipotle_southwest"><img src="./assets/img/chipotle_southwest.png" /><p>Chipotle Southwest</p></div>
-          <div class="selection_item" id="mayonnaise"><img src="./assets/img/mayonnaise.png" /><p>Mayonnaise</p></div>
-          <div class="selection_item" id="ranch"><img src="./assets/img/ranch.png" /><p>Ranch</p></div>
-          <div class="selection_item" id="oil"><img src="./assets/img/oil.png" /><p>Oil</p></div>
-          <div class="selection_item" id="vinaigrette"><img src="./assets/img/vinaigrette.png" /><p>Vinaigrette</p></div>
-          <div class="selection_item" id="mustard"><img src="./assets/img/mustard.png" /><p>Mustard</p></div>
-          <div class="selection_item" id="vinegar"><img src="./assets/img/vinegar.png" /><p>Vinegar</p></div>
-          <div class="selection_item" id="sweet_onion"><img src="./assets/img/sweet_onion.png" /><p>Sweet Onion</p></div>
+      <div class="selection-container" id="cheese-selection-container">
+        <div class="selection-grid-container" id="cheese-grid-container">
+          <div class="selection-item" id="american"><img src="./assets/img/thumbnail/american.png" /><p>American</p></div>
+          <div class="selection-item" id="monterey-cheddar"><img src="./assets/img/thumbnail/monterey-cheddar.png" /><p>Monterey Cheddar</p></div>
         </div>
       </div>
-      <div class="selection_container" id="veggie_selection_container">
-        <div class="selection_grid_container" id="veggie_grid_container">
-          <div class="selection_item" id="cucumbers"><img src="./assets/img/cucumbers.png" /><p>Cucumbers</p></div>
-          <div class="selection_item" id="green_peppers"><img src="./assets/img/green_peppers.png" /><p>Green Peppers</p></div>
-          <div class="selection_item" id="lettuce"><img src="./assets/img/lettuce.png" /><p>Lettuce</p></div>
-          <div class="selection_item" id="red_onions"><img src="./assets/img/red_onions.png" /><p>Red Onions</p></div>
-          <div class="selection_item" id="spinach"><img src="./assets/img/spinach.png" /><p>Spinach</p></div>
-          <div class="selection_item" id="tomatoes"><img src="./assets/img/tomatoes.png" /><p>Tomatoes</p></div>
-          <div class="selection_item" id="banana_peppers"><img src="./assets/img/banana_peppers.png" /><p>Banana Peppers</p></div>
-          <div class="selection_item" id="jalapenos"><img src="./assets/img/jalapenos.png" /><p>Jalapeños</p></div>
-          <div class="selection_item" id="black_olives"><img src="./assets/img/black_olives.png" /><p>Black Olives</p></div>
-          <div class="selection_item" id="pickles"><img src="./assets/img/pickles.png" /><p>Pickles</p></div>
+      <div class="selection-container" id="sauce-selection-container">
+        <div class="selection-grid-container" id="sauce-grid-container">
+          <div class="selection-item" id="chipotle-southwest"><img src="./assets/img/thumbnail/chipotle-southwest.png" /><p>Chipotle Southwest</p></div>
+          <div class="selection-item" id="mayonnaise"><img src="./assets/img/thumbnail/mayonnaise.png" /><p>Mayonnaise</p></div>
+          <div class="selection-item" id="ranch"><img src="./assets/img/thumbnail/ranch.png" /><p>Ranch</p></div>
+          <div class="selection-item" id="oil"><img src="./assets/img/thumbnail/oil.png" /><p>Oil</p></div>
+          <div class="selection-item" id="vinaigrette"><img src="./assets/img/thumbnail/vinaigrette.png" /><p>Vinaigrette</p></div>
+          <div class="selection-item" id="mustard"><img src="./assets/img/thumbnail/mustard.png" /><p>Mustard</p></div>
+          <div class="selection-item" id="vinegar"><img src="./assets/img/thumbnail/vinegar.png" /><p>Vinegar</p></div>
+          <div class="selection-item" id="sweet-onion"><img src="./assets/img/thumbnail/sweet-onion.png" /><p>Sweet Onion</p></div>
         </div>
       </div>
-      <table id="nutrition_balloon">
+      <div class="selection-container" id="veggie-selection-container">
+        <div class="selection-grid-container" id="veggie-grid-container">
+          <div class="selection-item" id="cucumbers"><img src="./assets/img/thumbnail/cucumbers.png" /><p>Cucumbers</p></div>
+          <div class="selection-item" id="green-peppers"><img src="./assets/img/thumbnail/green-peppers.png" /><p>Green Peppers</p></div>
+          <div class="selection-item" id="lettuce"><img src="./assets/img/thumbnail/lettuce.png" /><p>Lettuce</p></div>
+          <div class="selection-item" id="red-onions"><img src="./assets/img/thumbnail/red-onions.png" /><p>Red Onions</p></div>
+          <div class="selection-item" id="spinach"><img src="./assets/img/thumbnail/spinach.png" /><p>Spinach</p></div>
+          <div class="selection-item" id="tomatoes"><img src="./assets/img/thumbnail/tomatoes.png" /><p>Tomatoes</p></div>
+          <div class="selection-item" id="banana-peppers"><img src="./assets/img/thumbnail/banana-peppers.png" /><p>Banana Peppers</p></div>
+          <div class="selection-item" id="jalapenos"><img src="./assets/img/thumbnail/jalapenos.png" /><p>Jalapeños</p></div>
+          <div class="selection-item" id="black-olives"><img src="./assets/img/thumbnail/black-olives.png" /><p>Black Olives</p></div>
+          <div class="selection-item" id="pickles"><img src="./assets/img/thumbnail/pickles.png" /><p>Pickles</p></div>
+        </div>
+      </div>
+      <div class="selection-container" id="sides-selection-container">
+        Enjoy the sandwich along with some sides!
+      </div>
+      <table id="nutrition-balloon">
         <tr><td>Calories</td><td align="right">0</td><td>Cal</td></tr>
         <tr><td>Fat</td><td align="right">0</td><td>g</td></tr>
         <tr><td>Sugars</td><td align="right">0</td><td>g</td></tr>
         <tr><td>Protein</td><td align="right">0</td><td>g</td></tr>
         <tr><td>Vitamin C</td><td align="right">0</td><td>% DV</td></tr>
       </table>
-      <div class="selection_transition_button disabled" id="back_button">< Back</div>
-      <div class="selection_transition_button" id="next_button">Next ></div>
+      <div class="selection-transition-button disabled" id="back-button">< Back</div>
+      <div class="selection-transition-button" id="next-button">Next ></div>
     </div>
   </article>
   <article id="info">
@@ -116,7 +123,7 @@
   
   <script src="./assets/js/jquery-3.3.1.slim.min.js"></script>
   <script src="./assets/js/constants.js"></script>
-  <script src="./assets/js/menu_data.js"></script>
+  <script src="./assets/js/ingredient_data.js"></script>
   <script src="./assets/js/utility.js"></script>
   <script src="./assets/js/get_dom_elements.js"></script>
   <script src="./assets/js/transition_buttons.js"></script>
