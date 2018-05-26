@@ -7,15 +7,6 @@ const totalNutritionTds = Array.from(document.getElementById('total-nutrition').
                                .map(tr => Array.from(tr.childNodes)[1]);
 
 const selectionContainers = Array.from(document.getElementsByClassName('selection-container'));
-
-/*const selectionContainers = [ // 名前使うようだったら一つ一つの要素をobjectにしてnameとdomを作る
-  document.getElementById('bread-selection-container'),
-  document.getElementById('meat-selection-container'),
-  document.getElementById('cheese-selection-container'),
-  document.getElementById('sauce-selection-container'),
-  document.getElementById('veggie-selection-container')
-];*/
-
 const selectionItems = Array.from(document.getElementsByClassName('selection-item'));
 
 const nutritionBalloon = document.getElementById('nutrition-balloon');

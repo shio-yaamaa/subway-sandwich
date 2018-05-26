@@ -163,49 +163,49 @@ const ingredientData = {
   },
   sauce: {
     chipotleSouthwest: {
-      selected: true,
+      selected: false,
       nutrition: [100, 10, 1, 0, 0],
       position: Object.assign({}, SAUCE_POSITION, {offset: [-15, -3]}),
       order: 4
     },
     mayonnaise: {
-      selected: true,
+      selected: false,
       nutrition: [110, 12, 0, 0, 0],
       position: Object.assign({}, SAUCE_POSITION, {offset: [25, 6]}),
       order: 4
     },
     ranch: {
-      selected: true,
+      selected: false,
       nutrition: [110, 11, 1, 0, 0],
       position: Object.assign({}, SAUCE_POSITION, {offset: [-2, 9]}),
       order: 4
     },
     oil: {
-      selected: true,
+      selected: false,
       nutrition: [45, 5, 0, 0, 0],
       position: Object.assign({}, SAUCE_POSITION, {offset: [-10, 7]}),
       order: 4
     },
     vinaigrette: {
-      selected: true,
+      selected: false,
       nutrition: [40, 4, 1, 0, 0],
       position: Object.assign({}, SAUCE_POSITION, {offset: [-3, -8]}),
       order: 4
     },
     mustard: {
-      selected: true,
+      selected: false,
       nutrition: [5, 0, 0, 0, 0],
       position: Object.assign({}, SAUCE_POSITION, {offset: [9, 1]}),
       order: 4
     },
     vinegar: {
-      selected: true,
+      selected: false,
       nutrition: [0, 0, 0, 0, 0],
       position: Object.assign({}, SAUCE_POSITION, {offset: [13, -5]}),
       order: 4
     },
     sweetOnion: {
-      selected: true,
+      selected: false,
       nutrition: [40, 0, 8, 0, 0],
       position: SAUCE_POSITION,
       order: 4

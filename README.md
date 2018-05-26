@@ -5,8 +5,6 @@ Amber500
 
 # Next
 
-Sauce's position in footlong bread isn't right
-
 Set offsets ("Italian herbs and cheese" top)
 
 Item -> Ingredient in utility?

@@ -32,6 +32,9 @@ const setPreviewContainerSize = (isSixInch) => {
 };
 setPreviewContainerSize(ingredientData.breadSize.sixInch.selected);
 
+console.log('vinegar position', ingredientData.sauce.vinegar.position);
+console.log('half of the frame', FOOTLONG_STANDARD_SIZE[0] / 2);
+
 const showIngredientPreview = (ingredient, isSixInch) => {
   const ingredientName = getItemName(ingredient);
   if (getSectionName(ingredientName) === 'bread') {
@@ -42,12 +45,10 @@ const showIngredientPreview = (ingredient, isSixInch) => {
     );
   } else {
     for (let i = 0; i < (isSixInch ? 1 : 2); i++) {
-      //const position = isSixInch ? ingredient.position.sixInch : ingredient.position.footlong[i];
       const coordinates = [
         isSixInch
           ? 'center'
-          : (FOOTLONG_STANDARD_SIZE[0] * i
-            + (FOOTLONG_STANDARD_SIZE[0] / 2 + ingredient.position.footlongDistance / 2 * (i === 0 ? 1 : -1)) * (i === 0 ? 1 : -1)),
+          : (FOOTLONG_STANDARD_SIZE[0] / 2 + ingredient.position.footlongDistance / 2), // The distance from the left or right edge stays the same while i changes
         ingredient.position.y
       ];
       createPreviewImage(
@@ -76,8 +77,6 @@ const createPreviewImage = (ingredientName, imageName, coordinates, isAlignedLef
   const image = new Image();
   image.style.visibility = 'hidden';
   image.onload = () => {
-    image.style.transform = `scale(${scale})`;
-    
     // Set horizontal position
     if (coordinates[0] === 'center') {
       image.style.transformOrigin = 'top center';
@@ -88,13 +87,14 @@ const createPreviewImage = (ingredientName, imageName, coordinates, isAlignedLef
         image.style.left = `${(coordinates[0] + offset[0]) * scale}px`;
       } else {
         image.style.transformOrigin = 'top right';
-        image.style.right = `${(coordinates[0] + offset[0]) * scale}px`;
+        image.style.right = `${(coordinates[0] - offset[0]) * scale}px`;
       }
     }
     
     // Set vertical position
     image.style.top = `${(coordinates[1] + offset[1]) * scale}px`;
     
+    image.style.transform = `scale(${scale})`;
     image.style.visibility = 'visible';
   };
   image.src = `assets/img/preview/${imageName}.svg`;
