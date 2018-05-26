@@ -15,16 +15,16 @@ Item -> Ingredient in utility?
 
 # Todo
 
-- Make the thumbnails svg
-
 - Window resize event
 
 - Smartphone
 
-- Sides image
-
 - Refactor transition_buttons.js
 
 - Remove the border of the preview container
+
+- Revise the questions
+
+- Footer
 
 🥪 🥪 🥪
