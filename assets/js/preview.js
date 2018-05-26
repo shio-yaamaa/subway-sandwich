@@ -32,9 +32,6 @@ const setPreviewContainerSize = (isSixInch) => {
 };
 setPreviewContainerSize(ingredientData.breadSize.sixInch.selected);
 
-console.log('vinegar position', ingredientData.sauce.vinegar.position);
-console.log('half of the frame', FOOTLONG_STANDARD_SIZE[0] / 2);
-
 const showIngredientPreview = (ingredient, isSixInch) => {
   const ingredientName = getItemName(ingredient);
   if (getSectionName(ingredientName) === 'bread') {
@@ -114,10 +111,11 @@ const createPreviewImage = (ingredientName, imageName, coordinates, isAlignedLef
   }
 };
 
-const hideIngredientPreview = ingredient => {
-  const ingredientNameAttr = camelToKebab(getItemName(ingredient));
+// If isBreadTop, ingredient can be null
+const hideIngredientPreview = (ingredient, isBreadTop=false) => {
+  const ingredientNameAttr = isBreadTop ? 'bread-top' : camelToKebab(getItemName(ingredient));
   Array.from(previewContainer.children).forEach(element => {
-    if (ingredientNameAttr === element.getAttribute(INGREDIENT_NAME_ATTR)) {
+    if (element.getAttribute(INGREDIENT_NAME_ATTR) === ingredientNameAttr) {
       element.remove();
     }
   });

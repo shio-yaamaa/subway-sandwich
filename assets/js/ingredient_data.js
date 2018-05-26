@@ -326,7 +326,7 @@ const breadTopData = {
     position: NORMAL_BREAD_TOP_POSITION
   },
   italianHerbsAndCheese: {
-    position: NORMAL_BREAD_TOP_POSITION
+    position: Object.assign({}, NORMAL_BREAD_TOP_POSITION, {offset: [0, -3]}),
   },
   flatbread: {
     position: FLATBREAD_TOP_POSITION
