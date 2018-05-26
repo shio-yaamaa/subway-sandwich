@@ -85,12 +85,15 @@ const selectIngredient = ingredient => {
        meat -> remove
        cheese -> remove
        sauce -> remove
-       veggie -> remove */
+       veggie -> remove
+       side -> remove */
     if (sectionName === 'breadSize' || sectionName === 'bread') { // Stay
       return;
     } else { // Remove
       toggleSelectedness(ingredient, false);
-      hideIngredientPreview(ingredient);
+      if (sectionName != 'side') {
+        hideIngredientPreview(ingredient);
+      }
     }
   } else {
     /* breadSize -> switch + change all the preview images
@@ -98,7 +101,8 @@ const selectIngredient = ingredient => {
        meat -> switch
        cheese -> add
        sauce -> add
-       veggie -> add */
+       veggie -> add
+       side -> add */
     if (sectionName === 'breadSize') {
       toggleSelectedness(ingredientData.breadSize.sixInch, !ingredientData.breadSize.sixInch.selected);
       toggleSelectedness(ingredientData.breadSize.footlong, !ingredientData.breadSize.footlong.selected);
@@ -119,7 +123,9 @@ const selectIngredient = ingredient => {
       });
     } else { // Add
       toggleSelectedness(ingredient, true);
-      showIngredientPreview(ingredient, ingredientData.breadSize.sixInch.selected);
+      if (sectionName != 'side') {
+        showIngredientPreview(ingredient, ingredientData.breadSize.sixInch.selected);
+      }
     }
   }
   

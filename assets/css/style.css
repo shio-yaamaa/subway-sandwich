@@ -15,6 +15,7 @@ body {
   overflow-x: hidden;
   
 	font-family: 'Noto Sans', sans-serif;
+	user-select: none;
 	color: #333333;
 }
 

@@ -1,5 +1,7 @@
 /* global FOOTLONG_STANDARD_SIZE */
 
+// Nutrition: [calories, fat, sugars, protein, vitamin C]
+
 const NORMAL_BREAD_BOTTOM_POSITION = {
   y: 170,
   offset: [0, 0]
@@ -311,6 +313,40 @@ const ingredientData = {
         offset: [0, 0]
       },
       order: 9
+    }
+  },
+  side: {
+    appleSlices: {
+      selected: false,
+      nutrition: [35, 0, 7, 0, 30]
+    },
+    sunChips: {
+      selected: false,
+      nutrition: [210, 9, 3, 4, 0]
+    },
+    bakedLaysPotatoCrisps: {
+      selected: false,
+      nutrition: [130, 2, 2, 2, 2]
+    },
+    doritosNachoCheese: {
+      selected: false,
+      nutrition: [250, 13, 2, 4, 0]
+    },
+    laysClassicPotatoChips: {
+      selected: false,
+      nutrition: [230, 15, 0, 3, 15]
+    },
+    chocolateChip: {
+      selected: false,
+      nutrition: [200, 10, 18, 2, 0]
+    },
+    oatmealRaisin: {
+      selected: false,
+      nutrition: [200, 8, 16, 3, 0]
+    },
+    whiteChipMacadamiaNut: {
+      selected: false,
+      nutrition: [220, 11, 17, 2, 0]
     }
   }
 };

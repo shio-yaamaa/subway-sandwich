@@ -19,6 +19,12 @@
   background-color: white;
 }
 
+@media screen and (orientation: portrait) {
+  .selection-container {
+    flex-direction: column;
+  }
+}
+
 .selection-container:first-child {
   left: 0;
 }
@@ -45,6 +51,13 @@
   grid-template-rows: repeat(2, 10vw);
 }
 
+@media screen and (orientation: portrait) {
+  #meat-grid-container {
+    grid-template-columns: repeat(3, 12vw);
+    grid-template-rows: repeat(3, 10vw);
+  }
+}
+
 #cheese-grid-container {
   grid-template-columns: repeat(2, 12vw);
 }
@@ -54,9 +67,35 @@
   grid-template-rows: repeat(2, 10vw);
 }
 
+@media screen and (orientation: portrait) {
+  #sauce-grid-container {
+    grid-template-columns: repeat(3, 12vw);
+    grid-template-rows: repeat(3, 10vw);
+  }
+}
+
 #veggie-grid-container {
   grid-template-columns: repeat(5, 12vw);
   grid-template-rows: repeat(2, 10vw);
+}
+
+@media screen and (orientation: portrait) {
+  #veggie-grid-container {
+    grid-template-columns: repeat(3, 12vw);
+    grid-template-rows: repeat(4, 10vw);
+  }
+}
+
+#side-grid-container {
+  grid-template-columns: repeat(4, 12vw);
+  grid-template-rows: repeat(2, 10vw);
+}
+
+@media screen and (orientation: portrait) {
+  #side-grid-container {
+    grid-template-columns: repeat(3, 12vw);
+    grid-template-rows: repeat(3, 10vw);
+  }
 }
 
 .selection-item {
