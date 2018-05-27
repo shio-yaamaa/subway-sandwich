@@ -8,7 +8,7 @@
 
 /* global camelToKebab */
 /* global kebabToCamel */
-/* global getItemName */
+/* global getIngredientName */
 /* global getSectionName */
 
 /* global middle */
@@ -33,7 +33,7 @@ const setPreviewContainerSize = (isSixInch) => {
 setPreviewContainerSize(ingredientData.breadSize.sixInch.selected);
 
 const showIngredientPreview = (ingredient, isSixInch) => {
-  const ingredientName = getItemName(ingredient);
+  const ingredientName = getIngredientName(ingredient);
   if (getSectionName(ingredientName) === 'bread') {
     const imageName = `${camelToKebab(ingredientName)}-${isSixInch ? 'six-inch' : 'footlong'}-bottom`;
     createPreviewImage(
@@ -113,7 +113,7 @@ const createPreviewImage = (ingredientName, imageName, coordinates, isAlignedLef
 
 // If isBreadTop, ingredient can be null
 const hideIngredientPreview = (ingredient, isBreadTop=false) => {
-  const ingredientNameAttr = isBreadTop ? 'bread-top' : camelToKebab(getItemName(ingredient));
+  const ingredientNameAttr = isBreadTop ? 'bread-top' : camelToKebab(getIngredientName(ingredient));
   Array.from(previewContainer.children).forEach(element => {
     if (element.getAttribute(INGREDIENT_NAME_ATTR) === ingredientNameAttr) {
       element.remove();

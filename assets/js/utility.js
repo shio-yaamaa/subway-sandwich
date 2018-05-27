@@ -4,36 +4,36 @@
 const kebabToCamel = kebab => kebab.replace(/(\-\w)/g, m => m[1].toUpperCase());
 const camelToKebab = camel => camel.split(/(?=[A-Z])/).join('-').toLowerCase();
 
-// Returns the DOM element of the thumbnail button corresponding to the given item
-// item can be either the item name or the item object
-const getItemDomElement = item => {
-  const itemName = typeof item === 'string' ? item : getItemName(item);
-  const id = camelToKebab(itemName);
+// Returns the DOM element of the thumbnail button corresponding to the given ingredient
+// ingredient can be either the ingredient name or the ingredient object
+const getIngredientDomElement = ingredient => {
+  const ingredientName = typeof ingredient === 'string' ? ingredient : getIngredientName(ingredient);
+  const id = camelToKebab(ingredientName);
   return document.getElementById(id);
 };
 
-// Obtain item name from the item object
-const getItemName = object => {
-  let itemName;
+// Obtain ingredient name from the ingredient object
+const getIngredientName = object => {
+  let ingredientName;
   Object.keys(ingredientData).forEach(currentSectionName => {
-    Object.keys(ingredientData[currentSectionName]).forEach(currentItemName => {
-      if (ingredientData[currentSectionName][currentItemName] === object) {
-        itemName = currentItemName;
+    Object.keys(ingredientData[currentSectionName]).forEach(currentIngredientName => {
+      if (ingredientData[currentSectionName][currentIngredientName] === object) {
+        ingredientName = currentIngredientName;
       }
     });
   });
-  return itemName;
+  return ingredientName;
 };
 
-// item can be either the item name or the item object
-const getSectionName = item => {
-  const isStringGiven = typeof item === 'string';
+// ingredient can be either the ingredient name or the ingredient object
+const getSectionName = ingredient => {
+  const isStringGiven = typeof ingredient === 'string';
 	let sectionName;
 	Object.keys(ingredientData).forEach(currentSectionName => {
-  	if (isStringGiven && ingredientData[currentSectionName].hasOwnProperty(item)) {
+  	if (isStringGiven && ingredientData[currentSectionName].hasOwnProperty(ingredient)) {
     	sectionName = currentSectionName;
-    } else if (!isStringGiven && Object.keys(ingredientData[currentSectionName]).reduce((accumulator, currentItemKey) => {
-      return accumulator || ingredientData[currentSectionName][currentItemKey] === item;
+    } else if (!isStringGiven && Object.keys(ingredientData[currentSectionName]).reduce((accumulator, currentIngredientKey) => {
+      return accumulator || ingredientData[currentSectionName][currentIngredientKey] === ingredient;
     }, false)) {
       sectionName = currentSectionName;
     }
@@ -41,40 +41,53 @@ const getSectionName = item => {
   return sectionName;
 };
 
-// item can be either the item name or the item object
-const getNutritionFacts = item => {
-  return typeof item === 'string'
-    ? ingredientData[getSectionName(item)][item].nutrition
-    : item.nutrition;
+// ingredient can be either the ingredient name or the ingredient object
+const getNutritionFacts = ingredient => {
+  return typeof ingredient === 'string'
+    ? ingredientData[getSectionName(ingredient)][ingredient].nutrition
+    : ingredient.nutrition;
 };
 
-const computeTotalNutrition = (ignoreBreadSize=false) => {
+const calculateTotalNutrition = (isSixInch, includeSides=true) => {
   let sixInchNutrition = [0, 0, 0, 0, 0];
+  
+  // Add all the ingredients except sides
   Object.keys(ingredientData).forEach(currentSectionName => {
-    if (currentSectionName === 'breadSize') {
+    if (currentSectionName === 'breadSize' || currentSectionName === 'side') {
       return;
     }
-    Object.keys(ingredientData[currentSectionName]).forEach(currentItemName => {
-      if (ingredientData[currentSectionName][currentItemName].selected) {
+    Object.keys(ingredientData[currentSectionName]).forEach(currentIngredientName => {
+      if (ingredientData[currentSectionName][currentIngredientName].selected) {
         sixInchNutrition = sixInchNutrition.map((element, index) => {
-          return element + ingredientData[currentSectionName][currentItemName].nutrition[index];
+          return element + ingredientData[currentSectionName][currentIngredientName].nutrition[index];
         });
       }
     });
   });
-  return multiplyNutrition(sixInchNutrition, ingredientData.breadSize.sixInch.selected ? 1 : 2);
+  
+  const multipliedNutrition = multiplyNutrition(sixInchNutrition, isSixInch);
+  let totalNutrition = multipliedNutrition;
+  
+  // Add sides if includeSides
+  if (includeSides) {
+    Object.keys(ingredientData.side).forEach(currentSideName => {
+      if (ingredientData.side[currentSideName].selected) {
+        totalNutrition = totalNutrition.map((element, index) => {
+          return element + ingredientData.side[currentSideName].nutrition[index];
+        });
+      }
+    });
+  }
+  
+  return totalNutrition;
 };
 
-const multiplyNutrition = (originalNutrition, scalar) => {
-  return originalNutrition.map(element => element * scalar);
-};
-
-const addNutrition = (nutrition1, nutrition2) => {
-  return nutrition1.map((element, index) => element + nutrition2[index]);
-};
+const multiplyNutrition = (originalNutrition, isSixInch) => {
+  return originalNutrition.map(element => element * (isSixInch ? 1 : 2));
+}
 
 const updateTotalNutrition = () => {
-  const totalNutrition = computeTotalNutrition();
+  const totalNutrition = calculateTotalNutrition(ingredientData.breadSize.sixInch.selected);
   for (let i = 0; i < totalNutritionTds.length; i++) {
     totalNutritionTds[i].textContent = totalNutrition[i];
   }

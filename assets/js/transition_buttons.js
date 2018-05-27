@@ -11,6 +11,34 @@ let previousPageIndex = 0;
 let currentPageIndex = 0;
 const maxPageIndex = selectionContainers.length - 1;
 
+const movePages = isNextButtonClicked => {
+  console.log(`${isNextButtonClicked ? '-' : ''}100vw`);
+  
+  // Move previous page out of the window
+  selectionContainers[previousPageIndex].style.left = `${isNextButtonClicked ? '-' : ''}100vw`;
+  questionContainers[previousPageIndex].style.left = `${isNextButtonClicked ? '-' : ''}100vw`;
+  
+  // Bring current page in the window
+  selectionContainers[currentPageIndex].style.left = '0';
+  questionContainers[currentPageIndex].style.left = '0';
+};
+
+const setButtonAvailability = () => {
+  // Back button
+  if (currentPageIndex === 0) {
+    backButton.classList.add('disabled');
+  } else if (previousPageIndex === 0) {
+    backButton.classList.remove('disabled');
+  }
+  
+  // Next button
+  if (currentPageIndex === maxPageIndex) {
+    nextButton.classList.add('disabled');
+  } else if (previousPageIndex === maxPageIndex) {
+    nextButton.classList.remove('disabled');
+  }
+};
+
 const setBreadTopPreviewVisibility = () => {
   if (currentPageIndex === maxPageIndex) {
     showBreadTopPreview();
@@ -21,57 +49,21 @@ const setBreadTopPreviewVisibility = () => {
 };
 
 backButton.addEventListener('click', () => {
-  if (currentPageIndex === 0) {
-    return;
-  }
-  
-  // Move current page to the right
-  selectionContainers[currentPageIndex].style.left = '100vw';
-  questionContainers[currentPageIndex].style.left = '100vw';
+  if (currentPageIndex === 0) { return; }
   
   previousPageIndex = currentPageIndex--;
   
-  // Bring current page in the window
-  selectionContainers[currentPageIndex].style.left = '0';
-  questionContainers[currentPageIndex].style.left = '0';
-  
-  // If this is the first page, disable the back button
-  if (currentPageIndex === 0) {
-    backButton.classList.add('disabled');
-  }
-  
-  // If the previous page was the last page, enable the next button
-  if (currentPageIndex + 1 === maxPageIndex) {
-    nextButton.classList.remove('disabled');
-  }
-  
+  movePages(false);
+  setButtonAvailability();
   setBreadTopPreviewVisibility();
 });
 
 nextButton.addEventListener('click', () => {
-  if (currentPageIndex === maxPageIndex) {
-    return;
-  }
-  
-  // Move current selection container to the left
-  selectionContainers[currentPageIndex].style.left = '-100vw';
-  questionContainers[currentPageIndex].style.left = '-100vw';
+  if (currentPageIndex === maxPageIndex) { return; }
   
   previousPageIndex = currentPageIndex++;
   
-  // Bring current selection container in the window
-  selectionContainers[currentPageIndex].style.left = '0';
-  questionContainers[currentPageIndex].style.left = '0';
-  
-  // If this is the last page, disable the next button
-  if (currentPageIndex === maxPageIndex) {
-    nextButton.classList.add('disabled');
-  }
-  
-  // If the previous page was the first page, enable the back button
-  if (currentPageIndex - 1 === 0) {
-    backButton.classList.remove('disabled');
-  }
-  
+  movePages(true);
+  setButtonAvailability();
   setBreadTopPreviewVisibility();
 });

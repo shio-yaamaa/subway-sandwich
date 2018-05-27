@@ -3,10 +3,11 @@
 // Utilities
 
 /* global kebabToCamel */
-/* global getItemDomElement */
-/* global getItemName */
+/* global getIngredientDomElement */
+/* global getIngredientName */
 /* global getSectionName */
 /* global getNutritionFacts */
+/* global calculateTotalNutrition */
 /* global multiplyNutrition */
 /* global updateTotalNutrition */
 
@@ -32,18 +33,20 @@ selectionItems.map(element => {
   
   element.addEventListener('mouseenter', () => {
     // Update the nutrition balloon
+    let nutritionFactsForBalloon;
     switch (sectionName) {
       case 'breadSize':
-        // TODO
+        nutritionFactsForBalloon = calculateTotalNutrition(ingredientName === 'sixInch', false);
         break;
-      default: // bread, meat, cheese, sauce, veggie
-        const nutritionFacts = multiplyNutrition(
-          getNutritionFacts(kebabToCamel(element.id)),
-          ingredientData.breadSize.sixInch.selected ? 1 : 2
+      default: // bread, meat, cheese, sauce, veggie, side
+        nutritionFactsForBalloon = multiplyNutrition(
+          getNutritionFacts(ingredientName),
+          ingredientData.breadSize.sixInch.selected
         );
-        for (let i = 0; i < nutritionBalloonTds.length; i++) {
-          nutritionBalloonTds[i].textContent = nutritionFacts[i];
-        }
+        break;
+    }
+    for (let i = 0; i < nutritionBalloonTds.length; i++) {
+      nutritionBalloonTds[i].textContent = nutritionFactsForBalloon[i];
     }
     
     // Move and show the balloon
@@ -70,15 +73,15 @@ const toggleSelectedness = (ingredient, selected) => {
   
   // Toggle the class of the DOM element
   if (selected) {
-    getItemDomElement(ingredient).classList.add('selected');
+    getIngredientDomElement(ingredient).classList.add('selected');
   } else {
-    getItemDomElement(ingredient).classList.remove('selected');
+    getIngredientDomElement(ingredient).classList.remove('selected');
   }
 };
 
 const selectIngredient = ingredient => {
   const sectionName = getSectionName(ingredient);
-  const ingredientName = getItemName(ingredient);
+  const ingredientName = getIngredientName(ingredient);
   if (ingredient.selected) { // The ingredient is already selected
     /* breadSize -> stay
        bread -> stay
