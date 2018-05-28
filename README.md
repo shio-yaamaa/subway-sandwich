@@ -5,10 +5,8 @@ Amber500
 
 # Todo
 
-- Revise the questions
+- Favicon
 
-- Footer
-
-  - 
+- OG image
 
 🥪 🥪 🥪
