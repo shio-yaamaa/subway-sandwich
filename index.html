@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>Subway Order Simulator & Nutrition Calculator</title>
+	<title>Subway Nutrition Calculator</title>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/upper.css">
@@ -17,16 +17,16 @@
         <div class="question">What kind of bread?</div>
       </div>
       <div class="question-container" id="meat-question-container">
-        <div class="question">What kind of meat?</div>
+        <div class="question">What type of sandwich?</div>
       </div>
       <div class="question-container" id="cheese-question-container">
-        <div class="question">Cheese?</div>
+        <div class="question">What kind of cheese?</div>
       </div>
       <div class="question-container" id="sauce-question-container">
-        <div class="question">Sauce?</div>
+        <div class="question">What sauce?</div>
       </div>
       <div class="question-container" id="veggie-question-container">
-        <div class="question">Vegetables?</div>
+        <div class="question">What veggies?</div>
       </div>
       <div class="question-container" id="side-question-container">
         <div class="question">Anything else?</div>
@@ -105,9 +105,9 @@
         <div class="selection-grid-container" id="side-grid-container">
           <div class="selection-item" id="apple-slices"><img src="./assets/img/thumbnail/apple-slices.svg" /><p>Apple Slices</p></div>
           <div class="selection-item" id="sun-chips"><img src="./assets/img/thumbnail/sun-chips.svg" /><p>Sun Chips</p></div>
-          <div class="selection-item" id="baked-lays-potato-crisps"><img src="./assets/img/thumbnail/baked-lays-potato-crisps.svg" /><p>Baked Lay's® Potato Crisps</p></div>
-          <div class="selection-item" id="doritos-nacho-cheese"><img src="./assets/img/thumbnail/doritos-nacho-cheese.svg" /><p>Doritos® Nacho Cheese</p></div>
-          <div class="selection-item" id="lays-classic-potato-chips"><img src="./assets/img/thumbnail/lays-classic-potato-chips.svg" /><p>Lay's® Classic Potato Chips</p></div>
+          <div class="selection-item" id="baked-lays-potato-crisps"><img src="./assets/img/thumbnail/baked-lays-potato-crisps.svg" /><p>Baked Lay's Potato Crisps</p></div>
+          <div class="selection-item" id="doritos-nacho-cheese"><img src="./assets/img/thumbnail/doritos-nacho-cheese.svg" /><p>Doritos Nacho Cheese</p></div>
+          <div class="selection-item" id="lays-classic-potato-chips"><img src="./assets/img/thumbnail/lays-classic-potato-chips.svg" /><p>Lay's Classic Potato Chips</p></div>
           <div class="selection-item" id="chocolate-chip"><img src="./assets/img/thumbnail/chocolate-chip.svg" /><p>Chocolate Chip</p></div>
           <div class="selection-item" id="oatmeal-raisin"><img src="./assets/img/thumbnail/oatmeal-raisin.svg" /><p>Oatmeal Raisin</p></div>
           <div class="selection-item" id="white-chip-macadamia-nut"><img src="./assets/img/thumbnail/white-chip-macadamia-nut.svg" /><p>White Chip Macadamia Nut</p></div>
@@ -124,13 +124,13 @@
       <div class="selection-transition-button" id="next-button">Next ></div>
     </div>
   </article>
-  <article id="info">
-    <h1>About</h1>
-    <p>about</p>
-  </article>
-  <footer>This is footer.</footer>
+  <footer>
+    <ul>
+      <li>This menu includes only <a href="https://www.brandeating.com/2017/02/subway-launches-6-dollar-footlong-sub-of-day-deal.html">Sub of the Day</a> for each day of the week.</li>
+      <li>Nutritional data were retrieved from <a href="http://www.subway.com/en-us/menunutrition/nutrition">Subway Nutrition Information</a> and <a href="https://www.nutritionix.com/">Nutritionix</a> in May 2018.</li>
+    </ul>
+  </footer>
   
-  <script src="./assets/js/jquery-3.3.1.slim.min.js"></script>
   <script src="./assets/js/constants.js"></script>
   <script src="./assets/js/ingredient_data.js"></script>
   <script src="./assets/js/utility.js"></script>

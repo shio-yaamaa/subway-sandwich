@@ -39,3 +39,22 @@ article#main {
     padding: 0;
   }
 }
+
+footer {
+  padding: 2rem 1.4rem;
+  color: white;
+  background-color: #2E7D32; /* Green 800 */
+  
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  li {
+    margin: 1rem 0;
+  }
+  
+  a {
+    color: white;
+  }
+}

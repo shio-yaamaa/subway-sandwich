@@ -31,4 +31,17 @@ article#main {
     margin: 0;
     padding: 0; }
 
+footer {
+  padding: 2rem 1.4rem;
+  color: white;
+  background-color: #2E7D32;
+  /* Green 800 */ }
+  footer ul {
+    padding: 0;
+    list-style-type: none; }
+  footer li {
+    margin: 1rem 0; }
+  footer a {
+    color: white; }
+
 /*# sourceMappingURL=style.css.map */
