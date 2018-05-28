@@ -5,15 +5,13 @@
 /* global selectionContainers */
 
 /* global showBreadTopPreview */
-/* global hideIngredientPreview */
+/* global hideBreadTopPreview */
 
 let previousPageIndex = 0;
 let currentPageIndex = 0;
 const maxPageIndex = selectionContainers.length - 1;
 
 const movePages = isNextButtonClicked => {
-  console.log(`${isNextButtonClicked ? '-' : ''}100vw`);
-  
   // Move previous page out of the window
   selectionContainers[previousPageIndex].style.left = `${isNextButtonClicked ? '-' : ''}100vw`;
   questionContainers[previousPageIndex].style.left = `${isNextButtonClicked ? '-' : ''}100vw`;
@@ -44,7 +42,7 @@ const setBreadTopPreviewVisibility = () => {
     showBreadTopPreview();
   }
   if (previousPageIndex === maxPageIndex) {
-    hideIngredientPreview(null, true);
+    hideBreadTopPreview();
   }
 };
 

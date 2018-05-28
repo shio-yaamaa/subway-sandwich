@@ -38,7 +38,10 @@ selectionItems.map(element => {
       case 'breadSize':
         nutritionFactsForBalloon = calculateTotalNutrition(ingredientName === 'sixInch', false);
         break;
-      default: // bread, meat, cheese, sauce, veggie, side
+      case 'side':
+        nutritionFactsForBalloon = getNutritionFacts(ingredientName);
+        break;
+      default: // bread, meat, cheese, sauce, veggie
         nutritionFactsForBalloon = multiplyNutrition(
           getNutritionFacts(ingredientName),
           ingredientData.breadSize.sixInch.selected

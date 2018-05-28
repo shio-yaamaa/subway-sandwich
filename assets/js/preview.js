@@ -1,7 +1,6 @@
 /* global SIX_INCH_STANDARD_SIZE */
 /* global FOOTLONG_STANDARD_SIZE */
 /* global INGREDIENT_NAME_ATTR */
-/* global ORDER_ATTR */
 
 /* global ingredientData */
 /* global breadTopData */
@@ -15,9 +14,11 @@
 /* global previewContainer */
 
 let previewScale;
+const previewImages = []; // {ingredient, domElement, coordinates, isAlignedLeft, layer}
 
-// TODO: take the definition of previewScale out of this function and put it in a new function which deals with window resize. It also need to change the size (scale) of preview images.
+// Returns if previewScale has changed
 const setPreviewContainerSize = (isSixInch) => {
+  const previousPreviewScale = previewScale;
   const standardSize = isSixInch ? SIX_INCH_STANDARD_SIZE : FOOTLONG_STANDARD_SIZE;
   const isBoundByWidth = middle.clientWidth / standardSize[0] < middle.clientHeight / standardSize[1];
   previewScale = isBoundByWidth
@@ -29,16 +30,18 @@ const setPreviewContainerSize = (isSixInch) => {
   previewContainer.style.height = (isBoundByWidth
     ? middle.clientWidth / standardSize[0] * standardSize[1]
     : middle.clientHeight) + 'px';
+  
+  return previewScale != previousPreviewScale;
 };
 setPreviewContainerSize(ingredientData.breadSize.sixInch.selected);
 
 const showIngredientPreview = (ingredient, isSixInch) => {
   const ingredientName = getIngredientName(ingredient);
-  if (getSectionName(ingredientName) === 'bread') {
+  if (getSectionName(ingredient) === 'bread') {
     const imageName = `${camelToKebab(ingredientName)}-${isSixInch ? 'six-inch' : 'footlong'}-bottom`;
     createPreviewImage(
-      ingredientName, imageName, ['center', ingredient.position.y], true,
-      ingredient.position.offset, previewScale, ingredient.order
+      ingredient, imageName,
+      ['center', ingredient.position.y], true, previewScale, ingredient.layer
     );
   } else {
     for (let i = 0; i < (isSixInch ? 1 : 2); i++) {
@@ -49,8 +52,8 @@ const showIngredientPreview = (ingredient, isSixInch) => {
         ingredient.position.y
       ];
       createPreviewImage(
-        ingredientName, camelToKebab(ingredientName), coordinates, i === 1,
-        ingredient.position.offset, previewScale, ingredient.order
+        ingredient, camelToKebab(ingredientName),
+        coordinates, i === 1, previewScale, ingredient.layer
       );
     }
   }
@@ -63,77 +66,97 @@ const showBreadTopPreview = () => {
   }, undefined);
   const imageName = `${camelToKebab(breadName)}-${isSixInch ? 'six-inch' : 'footlong'}-top`;
   createPreviewImage(
-    'bread-top', imageName, ['center', breadTopData[breadName].position.y], true,
-    breadTopData[breadName].position.offset, previewScale, 100
+    breadTopData[breadName], imageName,
+    ['center', breadTopData[breadName].position.y], true, previewScale, 100
   );
 };
 
 // The x element of coordinates can be 'center'
-// isAlignedLeft: Whether to set image.style.left. If false, image.style.right will set
-const createPreviewImage = (ingredientName, imageName, coordinates, isAlignedLeft, offset, scale, order) => {
+// isAlignedLeft: Whether to set image.style.left. If false, image.style.right will be set
+const createPreviewImage = (ingredient, imageName, coordinates, isAlignedLeft, scale, layer) => {
   const image = new Image();
   image.style.visibility = 'hidden';
   image.onload = () => {
-    // Set horizontal position
-    if (coordinates[0] === 'center') {
-      image.style.transformOrigin = 'top center';
-      image.style.left = `${(previewContainer.clientWidth - image.clientWidth + offset[0] * scale) / 2}px`;
-    } else {
-      if (isAlignedLeft) {
-        image.style.transformOrigin = 'top left';
-        image.style.left = `${(coordinates[0] + offset[0]) * scale}px`;
-      } else {
-        image.style.transformOrigin = 'top right';
-        image.style.right = `${(coordinates[0] - offset[0]) * scale}px`;
-      }
-    }
-    
-    // Set vertical position
-    image.style.top = `${(coordinates[1] + offset[1]) * scale}px`;
-    
-    image.style.transform = `scale(${scale})`;
+    setPreviewImagePositionAndScale(image, coordinates, isAlignedLeft, ingredient.position.offset, scale);
     image.style.visibility = 'visible';
   };
   image.src = `assets/img/preview/${imageName}.svg`;
-  image.setAttribute(INGREDIENT_NAME_ATTR, camelToKebab(ingredientName));
-  image.setAttribute(ORDER_ATTR, order.toString());
   
-  // Insert the image to the appropriate depth
-  const inserted = Array.from(previewContainer.children).some(element => {
-    if (parseInt(element.getAttribute(ORDER_ATTR)) > order) {
-      previewContainer.insertBefore(image, element);
+  // Insert the image to the appropriate layer
+  const previewImageObject = {
+    ingredient: ingredient,
+    domElement: image,
+    coordinates: coordinates,
+    isAlignedLeft: isAlignedLeft,
+    layer: layer
+  };
+  const isInserted = previewImages.some((previewImage, index) => {
+    if (previewImage.layer > layer) {
+      previewContainer.insertBefore(image, previewImage.domElement);
+      previewImages.splice(index, 0, previewImageObject);
       return true;
     }
     return false;
   });
-  if (!inserted) {
+  if (!isInserted) {
     previewContainer.append(image);
+    previewImages.push(previewImageObject);
   }
 };
 
-// If isBreadTop, ingredient can be null
-const hideIngredientPreview = (ingredient, isBreadTop=false) => {
-  const ingredientNameAttr = isBreadTop ? 'bread-top' : camelToKebab(getIngredientName(ingredient));
-  Array.from(previewContainer.children).forEach(element => {
-    if (element.getAttribute(INGREDIENT_NAME_ATTR) === ingredientNameAttr) {
-      element.remove();
+const hideIngredientPreview = ingredient => { // There might be multiple preview images that represent this ingredient
+  for (let i = previewImages.length - 1; i >= 0; i--) {
+    if (previewImages[i].ingredient == ingredient) {
+      previewImages[i].domElement.remove();
+      previewImages.splice(i, 1);
     }
-  });
+  }
 };
 
-const changePreviewBreadSize = (toSixInch) => {
-  setPreviewContainerSize(toSixInch);
-  const existingImages = Array.from(previewContainer.children);
-  let previousIngredientName;
-  existingImages.forEach(existingImage => {
-    const ingredientName = kebabToCamel(existingImage.getAttribute(INGREDIENT_NAME_ATTR));
-    if (previousIngredientName != ingredientName) { // Skip the replacement of already replaced ingredients
-      const sectionName = getSectionName(ingredientName);
-      const ingredient = ingredientData[sectionName][ingredientName];
-      showIngredientPreview(ingredient, toSixInch);
-      previousIngredientName = ingredientName;
+const hideBreadTopPreview = () => {
+  const breadName = Object.keys(ingredientData.bread).reduce((accumulator, currentBreadName) => {
+    return ingredientData.bread[currentBreadName].selected ? currentBreadName : accumulator;
+  }, undefined);
+  hideIngredientPreview(breadTopData[breadName]);
+};
+
+// Used when creating images and updating them upon window resizing
+const setPreviewImagePositionAndScale = (imageElement, coordinates, isAlignedLeft, offset, scale) => {
+  // Set horizontal position
+  if (coordinates[0] === 'center') {
+    imageElement.style.transformOrigin = 'top center';
+    imageElement.style.left = `${(previewContainer.clientWidth - imageElement.clientWidth + offset[0] * scale) / 2}px`;
+  } else {
+    if (isAlignedLeft) {
+      imageElement.style.transformOrigin = 'top left';
+      imageElement.style.left = `${(coordinates[0] + offset[0]) * scale}px`;
+    } else {
+      imageElement.style.transformOrigin = 'top right';
+      imageElement.style.right = `${(coordinates[0] - offset[0]) * scale}px`;
     }
-    existingImage.remove();
+  }
+  
+  // Set vertical position
+  imageElement.style.top = `${(coordinates[1] + offset[1]) * scale}px`;
+  
+  // Set scale
+  imageElement.style.transform = `scale(${scale})`;
+};
+
+const changePreviewBreadSize = toSixInch => {
+  setPreviewContainerSize();
+  
+  const existingPreviewImages = previewImages.slice(); // Create a copy of previewImages because previewImages will be affected by index
+  let previousIngredient;
+  existingPreviewImages.forEach(existingPreviewImage => {
+    if (existingPreviewImage.ingredient != previousIngredient) { // If the current ingredient differs from the previous one, create a new preview image
+      showIngredientPreview(existingPreviewImage.ingredient, toSixInch);
+    }
+    previousIngredient = existingPreviewImage.ingredient;
+    
+    // Remove the existing preview image
+    existingPreviewImage.domElement.remove();
+    previewImages.splice(previewImages.indexOf(existingPreviewImage), 1);
   });
 };
 
@@ -145,6 +168,22 @@ Object.keys(ingredientData).forEach(sectionName => {
       if (ingredient.selected) {
         showIngredientPreview(ingredient, ingredientData.breadSize.sixInch.selected, false);
       }
+    });
+  }
+});
+
+// Add window resize event listener
+window.addEventListener('resize', () => {
+  const didPreviewScaleChange = setPreviewContainerSize(ingredientData.breadSize.sixInch.selected);
+  
+  // Update the size of the ingredient preview images
+  if (didPreviewScaleChange) {
+    previewImages.forEach(previewImage => {
+      setPreviewImagePositionAndScale(
+        previewImage.domElement,
+        previewImage.coordinates, previewImage.isAlignedLeft, previewImage.ingredient.position.offset,
+        previewScale
+      );
     });
   }
 });

@@ -1,0 +1,39 @@
+#middle {
+  grid-area: middle;
+  position: relative;
+}
+
+#preview-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#preview-container > * {
+  position: absolute;
+  transition: left 0s; /* Cancel the transition settings defined in style.scss */
+}
+
+#total-nutrition {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1vw 1.6vw;
+  border-radius: 0.4vw;
+  font-size: 1.4vw;
+  background-color: rgba(255, 255, 255, 0.7);
+  
+  @media screen and (max-width: 768px) {
+    padding: 1.5vw 2.4vw;
+    border-radius: 0.6vw;
+    font-size: 2.1vw;
+  }
+  @media screen and (max-width: 480px) {
+    padding: 2vw 3.2vw;
+    border-radius: 0.8vw;
+    font-size: 2.8vw;
+  }
+}

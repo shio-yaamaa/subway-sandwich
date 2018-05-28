@@ -1,0 +1,260 @@
+#lower {
+  grid-area: lower;
+  position: relative;
+}
+
+#lower > * {
+  position: absolute;
+}
+
+.selection-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1.3vw;
+  background-color: white;
+  
+  @media screen and (orientation: portrait) {
+    flex-direction: column;
+  }
+  
+  @media screen and (max-width: 768px) {
+    font-size: 1.95vw;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 2.6vw;
+  }
+}
+
+.selection-container:first-child {
+  left: 0;
+}
+
+.selection-container:not(:first-child) {
+  left: 100vw;
+}
+
+.selection-grid-container {
+  display: grid;
+}
+
+#bread-size-grid-container, #cheese-grid-container { /* 2 ingredients */
+  grid-template-columns: repeat(2, 12vw);
+  
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 18vw);
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(2, 24vw);
+  }
+}
+
+#bread-grid-container { /* 5 ingredients */
+  grid-template-columns: repeat(3, 12vw);
+  grid-template-rows: repeat(2, 10vw);
+  
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(3, 18vw);
+    grid-template-rows: repeat(2, 15vw);
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(3, 24vw);
+    grid-template-rows: repeat(2, 20vw);
+  }
+}
+
+#meat-grid-container, #sauce-grid-container, #side-grid-container { /* 7-8 ingredients */
+  grid-template-columns: repeat(4, 12vw);
+  grid-template-rows: repeat(2, 10vw);
+  
+  @media screen and (orientation: portrait) {
+    grid-template-columns: repeat(3, 12vw);
+    grid-template-rows: repeat(3, 10vw);
+  }
+  
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(3, 18vw);
+    grid-template-rows: repeat(2, 15vw);
+    
+    @media screen and (orientation: portrait) {
+      grid-template-columns: repeat(3, 18vw);
+      grid-template-rows: repeat(3, 15vw);
+    }
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(3, 24vw);
+    grid-template-rows: repeat(2, 20vw);
+    
+    @media screen and (orientation: portrait) {
+      grid-template-columns: repeat(3, 24vw);
+      grid-template-rows: repeat(3, 20vw);
+    }
+  }
+}
+
+#veggie-grid-container { /* 10 ingredients */
+  grid-template-columns: repeat(5, 12vw);
+  grid-template-rows: repeat(2, 10vw);
+  
+  @media screen and (orientation: portrait) {
+    grid-template-columns: repeat(3, 12vw);
+    grid-template-rows: repeat(4, 10vw);
+  }
+  
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(5, 18vw);
+    grid-template-rows: repeat(2, 15vw);
+    
+    @media screen and (orientation: portrait) {
+      grid-template-columns: repeat(3, 18vw);
+      grid-template-rows: repeat(4, 15vw);
+    }
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(5, 24vw);
+    grid-template-rows: repeat(2, 20vw);
+    
+    @media screen and (orientation: portrait) {
+      grid-template-columns: repeat(3, 24vw);
+      grid-template-rows: repeat(4, 20vw);
+    }
+  }
+}
+
+.selection-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.4vw 0;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  
+  @media screen and (max-width: 768px) {
+    padding: 0.6vw 0;
+  }
+  @media screen and (max-width: 480px) {
+    padding: 0.8vw 0;
+  }
+}
+
+.selection-item:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.selection-item > img {
+  width: 6vw;
+  height: 6vw;
+  border-radius: 50%;
+  border: 0.3vw solid #eeeeee;
+  
+  @media screen and (max-width: 768px) {
+    width: 9vw;
+    height: 9vw;
+    border-width: 0.45vw;
+  }
+  @media screen and (max-width: 480px) {
+    width: 12vw;
+    height: 12vw;
+    border-width: 0.6vw;
+  }
+}
+
+.selection-item.selected > img {
+  border-color: #FFC107;
+}
+
+.selection-grid-container p {
+  overflow-wrap: break-word;
+	text-align: center;
+}
+
+/* nutrition balloon */
+
+#nutrition-balloon {
+  bottom: 0;
+  left: 0;
+  padding: 0.3vw;
+  font-size: 1.2vw;
+  border-radius: 0.5vw;
+  color: white;
+  background-color: #616161;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0s;
+  
+  @media screen and (max-width: 768px) {
+    padding: 0.45vw;
+    font-size: 1.8vw;
+    border-radius: 0.75vw;
+  }
+  @media screen and (max-width: 480px) {
+    padding: 0.6vw;
+    font-size: 2.4vw;
+    border-radius: 1.0vw;
+  }
+}
+
+#nutrition-balloon:after {
+  content: "";
+	position: absolute;
+	bottom: -2.2vw;
+	left: 50%;
+ 	margin-left: -1vw;
+	border: 1vw solid transparent;
+	border-top: 1.4vw solid #616161;
+	
+	@media screen and (max-width: 768px) {
+    bottom: -3.3vw;
+    margin-left: -1.5vw;
+  	border-width: 1.5vw;
+  	border-top-width: 2.1vw;
+  }
+  @media screen and (max-width: 480px) {
+    bottom: -4.4vw;
+    margin-left: -2vw;
+  	border-width: 2vw;
+  	border-top-width: 2.8vw;
+  }
+}
+
+/* selection transition buttons */
+
+.selection-transition-button {
+  bottom: 2vw;
+  font-size: 2vw;
+  font-weight: bold;
+  cursor: default;
+  
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+  
+  &.disabled {
+    color: #9E9E9E;
+  }
+  
+  &:not(.disabled):hover {
+    color: #616161;
+  }
+  
+  @media screen and (max-width: 768px) {
+    bottom: 3vw;
+    font-size: 3vw;
+  }
+  @media screen and (max-width: 480px) {
+    bottom: 4vw;
+    font-size: 4vw;
+  }
+}
+
+#back-button {
+  left: 2vw;
+}
+
+#next-button {
+  right: 2vw;
+}

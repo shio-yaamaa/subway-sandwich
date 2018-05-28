@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  transition-property: background-color, color, opacity, left;
+  transition-duration: 0.2s, 0.2s, 0.2s, 0.4s;
+  transition-timing-function: linear, linear, linear, ease-in-out;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  
+	font-family: 'Noto Sans', sans-serif;
+	user-select: none;
+	color: #333333;
+}
+
+article#main {
+  display: grid;
+  grid-template-rows: 15% 40% 45%;
+  grid-template-areas: "upper"
+                       "middle"
+                       "lower";
+  width: 100vw;
+  height: 100%; /* 100vh doesn't take URL bar into consideration */
+  
+  @media screen and (orientation: portrait) {
+    grid-template-rows: 10% 30% 60%;
+  }
+  
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
